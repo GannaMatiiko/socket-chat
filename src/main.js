@@ -18,7 +18,7 @@ import { io } from 'socket.io-client';
 import BaseForm from './components/ui/BaseForm.vue';
 
 const app = createApp(App)
-app.config.globalProperties.$soketio = io('http://localhost:4000');
+app.config.globalProperties.$soketio = io(import.meta.env.VITE_VUE_APP_SOCKET_ENDPOINT);
 
 app.component('base-form', BaseForm);
 
