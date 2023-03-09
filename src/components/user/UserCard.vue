@@ -51,7 +51,7 @@
                 background:#DCDCDC;
             }
             &.active {
-                background: $darkGreen;
+                background: $yellow;
                 color: white;
             }
         }

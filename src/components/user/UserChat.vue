@@ -1,6 +1,8 @@
 <template>
     <UserMessage>
-        {{ msg.text }}
+        <template #author>{{ msg.user }}</template>
+        <template #text>{{ msg.text }}</template>
+        <template #time>{{ msg.date }}</template>
     </UserMessage>
 
 </template>
