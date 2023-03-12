@@ -7,7 +7,6 @@
             </div>
             <div class="chatplace-textarea">
                 <FormMessage></FormMessage>
-                <!-- <v-textarea label="Write a message" variant="outlined" no-resize :messages="showChatCommands"></v-textarea> -->
             </div>
         </div>
     </div>
@@ -23,86 +22,87 @@
         },
         data() {
             return {
-                // chatType: 'room',
-                // chatCommands: [
-                //     '/date',
-                //     '/me some string',
-                //     '/show members'
-                // ],
-                chatMessages: [
-                    {
-                        id: "63f3d8b3283c18ee1e7daa26",
-                        user: "Valeriy",
-                        roomId: "general",
-                        text: "hello",
-                        date: "2023-02-21 19:22:44"
-                    },
-                    {
-                        id: "nadfnj23njin4fjbk",
-                        user: "Boris",
-                        roomId: "general",
-                        text: "dobriy den evrybody",
-                        date: "2023-02-21 19:22:44"
-                    },
-                    {
-                        id: "gfggege",
-                        user: "Boris",
-                        roomId: "general",
-                        text: "i don't believe In terms of technical expectations, I am looking for a company that actively works with modern web technologies and frameworks, including React and Redux. I am excited to work on projects that challenge me and allow me to develop my skills further. Additionally, I am eager to work with a team that values clean and well-structured code.",
-                        date: "2023-02-21 19:22:49"
-                    },
-                    {
-                        id: "63f3d8b3283c18ee1e7daa26",
-                        user: "Valeriy",
-                        roomId: "general",
-                        text: "hello",
-                        date: "2023-02-21 19:22:44"
-                    },
-                    {
-                        id: "nadfnj23njin4fjbk",
-                        user: "Boris",
-                        roomId: "general",
-                        text: "dobriy den evrybody",
-                        date: "2023-02-21 19:22:44"
-                    },
-                    {
-                        id: "gfggege",
-                        user: "Boris",
-                        roomId: "general",
-                        text: "i don't believe In terms of technical expectations, I am looking for a company that actively works with modern web technologies and frameworks, including React and Redux. I am excited to work on projects that challenge me and allow me to develop my skills further. Additionally, I am eager to work with a team that values clean and well-structured code.",
-                        date: "2023-02-21 19:22:49"
-                    },
-                    {
-                        id: "63f3d8b3283c18ee1e7daa26",
-                        user: "Valeriy",
-                        roomId: "general",
-                        text: "hello",
-                        date: "2023-02-21 19:22:44"
-                    },
-                    {
-                        id: "nadfnj23njin4fjbk",
-                        user: "Boris",
-                        roomId: "general",
-                        text: "dobriy den evrybody",
-                        date: "2023-02-21 19:22:44"
-                    },
-                    {
-                        id: "gfggege",
-                        user: "Boris",
-                        roomId: "general",
-                        text: "i don't believe In terms of technical expectations, I am looking for a company that actively works with modern web technologies and frameworks, including React and Redux. I am excited to work on projects that challenge me and allow me to develop my skills further. Additionally, I am eager to work with a team that values clean and well-structured code.",
-                        date: "2023-02-21 19:22:49"
-                    }
-                ]
+                chatMessages: []
+                // chatMessages: [
+                //     {
+                //         id: "63f3d8b3283c18ee1e7daa26",
+                //         user: "Valeriy",
+                //         roomId: "general",
+                //         text: "hello",
+                //         date: "2023-02-21 19:22:44"
+                //     },
+                //     {
+                //         id: "nadfnj23njin4fjbk",
+                //         user: "Boris",
+                //         roomId: "general",
+                //         text: "dobriy den evrybody",
+                //         date: "2023-02-21 19:22:44"
+                //     },
+                //     {
+                //         id: "gfggege",
+                //         user: "Boris",
+                //         roomId: "general",
+                //         text: "i don't believe In terms of technical expectations, I am looking for a company that actively works with modern web technologies and frameworks, including React and Redux. I am excited to work on projects that challenge me and allow me to develop my skills further. Additionally, I am eager to work with a team that values clean and well-structured code.",
+                //         date: "2023-02-21 19:22:49"
+                //     },
+                //     {
+                //         id: "63f3d8b3283c18ee1e7daa26",
+                //         user: "Valeriy",
+                //         roomId: "general",
+                //         text: "hello",
+                //         date: "2023-02-21 19:22:44"
+                //     },
+                //     {
+                //         id: "nadfnj23njin4fjbk",
+                //         user: "Boris",
+                //         roomId: "general",
+                //         text: "dobriy den evrybody",
+                //         date: "2023-02-21 19:22:44"
+                //     },
+                //     {
+                //         id: "gfggege",
+                //         user: "Boris",
+                //         roomId: "general",
+                //         text: "i don't believe In terms of technical expectations, I am looking for a company that actively works with modern web technologies and frameworks, including React and Redux. I am excited to work on projects that challenge me and allow me to develop my skills further. Additionally, I am eager to work with a team that values clean and well-structured code.",
+                //         date: "2023-02-21 19:22:49"
+                //     },
+                //     {
+                //         id: "63f3d8b3283c18ee1e7daa26",
+                //         user: "Valeriy",
+                //         roomId: "general",
+                //         text: "hello",
+                //         date: "2023-02-21 19:22:44"
+                //     },
+                //     {
+                //         id: "nadfnj23njin4fjbk",
+                //         user: "Boris",
+                //         roomId: "general",
+                //         text: "dobriy den evrybody",
+                //         date: "2023-02-21 19:22:44"
+                //     },
+                //     {
+                //         id: "gfggege",
+                //         user: "Boris",
+                //         roomId: "general",
+                //         text: "i don't believe In terms of technical expectations, I am looking for a company that actively works with modern web technologies and frameworks, including React and Redux. I am excited to work on projects that challenge me and allow me to develop my skills further. Additionally, I am eager to work with a team that values clean and well-structured code.",
+                //         date: "2023-02-21 19:22:49"
+                //     }
+                // ]
             }
         },
         computed: {
             getUser() {
                 return this.$store.getters.getSelectedUser
             },
-            // showChatCommands() {
-            //     return this.chatType === 'room' ? this.chatCommands : this.chatCommands.slice(0, 2)
-            // }
+            chatMessages() {
+                return this.$store.getters.getChatMessages;
+            }
+        },
+        created() {
+            console.log('created');
+            this.$socketio.on('loadDefaultChatMessages', (data) => {
+                console.log('data', data);
+            })
         }
     }
 </script>
@@ -122,7 +122,8 @@
         }
         &-messages {
             padding: 30px;
-            max-height: 70vh;
+            max-height: 69vh;
+            height: 69vh;
             overflow-y: scroll;
             &::-webkit-scrollbar {
                 width: 10px;

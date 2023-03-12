@@ -12,6 +12,7 @@
                             v-model="email"
                             :rules="rules"
                             label="Enter your e-mail"
+                            autocomplete="on"
                             ></v-text-field>
                             <v-btn type="submit" block class="mt-2">Login</v-btn>
                         </v-form>
@@ -36,7 +37,7 @@ export default {
             this.$refs.loginForm.validate()
                 .then(data => {
                     if (data.valid) {
-                        this.$soketio.emit('login', this.email)
+                        this.$socketio.emit('login', this.email)
                         this.$router.replace('/')
                     }
                 })
