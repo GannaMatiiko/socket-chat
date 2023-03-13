@@ -37,7 +37,19 @@ export default {
             this.$refs.loginForm.validate()
                 .then(data => {
                     if (data.valid) {
-                        this.$socketio.emit('login', this.email)
+                        // this.$socketio.emit('login', this.email)
+                        
+                        this.axios.post('http://localhost:4000/users/login', {
+                            'email': this.email
+                        }).then((response) => {
+                            console.log(response.data);
+                            localStorage.setItem('token', response.data.token);
+                            localStorage.setItem('login', response.data.login);
+                            this.$store.dispatch('setUser', response.data)
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                         this.$router.replace('/')
                     }
                 })

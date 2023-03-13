@@ -1,11 +1,12 @@
 <template>
     <v-form @submit.prevent="sendMessage" class="send-form">
-        <v-textarea v-model="messageText" label="Write a message" variant="outlined" no-resize :messages="showChatCommands"></v-textarea>
+        <v-textarea @keydown.enter.prevent="sendMessage" v-model="messageText" label="Write a message" variant="outlined" no-resize :messages="showChatCommands"></v-textarea>
         <v-btn type="submit" class="send-form__btn mt-2">Send</v-btn>
     </v-form>
 </template>
 
 <script>
+import moment from 'moment';
     export default {
         data() {
             return {
@@ -31,7 +32,8 @@
                     user: "Valeriy",
                     roomId: "general",
                     text: this.messageText,
-                    date: "2023-02-21 19:22:44"
+                    // date: "2023-02-21 19:22:44"
+                    // date: moment().format('[today] HH:mm')
                 });
                 this.messageText = ''
             }

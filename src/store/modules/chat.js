@@ -14,6 +14,7 @@ export default {
         }
     },
     actions: {
+        // TODO remove setUser, cause login replaces it
         setUser({commit}, id) {
             commit('setUser', id)
         },
