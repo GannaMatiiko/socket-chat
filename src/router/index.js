@@ -18,6 +18,7 @@ const routes = [
   },
   {
     path: '/login',
+    name: 'Login',
     component: () => import('@/views/Login.vue'),
   },
 ]
@@ -25,6 +26,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem('token') !== null
+  if (to.name !== 'Login' && !isAuthenticated) {
+   next({ name: 'Login' }) 
+  }
+  if (to.name === 'Login' && isAuthenticated) {
+    next({ name: 'Home' })
+  } 
+  else next()
 })
 
 export default router

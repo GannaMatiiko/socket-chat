@@ -15,7 +15,7 @@
     export default {
         props: {
             chat: {
-                type: Array,
+                type: Object,
             }
         },
         methods: {

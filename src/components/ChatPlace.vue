@@ -94,9 +94,9 @@
             getUser() {
                 return this.$store.getters.getSelectedUser
             },
-            chatMessages() {
-                return this.$store.getters.getChatMessages;
-            }
+            // chatMessages() {
+            //     return this.$store.getters.getChatMessages;
+            // }
         },
         created() {
             console.log('created');
