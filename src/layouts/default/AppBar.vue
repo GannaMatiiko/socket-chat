@@ -13,7 +13,7 @@
 
       <v-btn variant="text" icon="mdi-cog"></v-btn>
 
-      <v-btn variant="text" icon="mdi-logout"></v-btn>
+      <v-btn @click="logout" variant="text" icon="mdi-logout"></v-btn>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -56,6 +56,18 @@
         this.drawer = false
       },
     },
+    methods: {
+      logout() {
+        this.axios.post('http://localhost:4000/users/logout', {},  {
+                headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } 
+            })
+            .then(() => {
+              this.$router.replace('/login');
+              this.$store.dispatch('logoutUser')
+            }
+            )
+      }
+    }
   }
 </script>
 

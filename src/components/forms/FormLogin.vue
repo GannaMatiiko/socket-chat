@@ -17,8 +17,8 @@
                             <v-btn type="submit" block class="mt-2">Login</v-btn>
                         </v-form>
                     </div>
-
                 </v-sheet>
+                <v-snackbar v-model="snackbar" color="deep-orange-darken-2">Some problem with login...</v-snackbar>
         </v-responsive>
     </v-container>
 </template>
@@ -26,31 +26,26 @@
 <script>
 export default {
     data: () => ({
-        valid: false,
         email: '',
         rules: [
             value => /.+@.+/.test(value) || 'Invalid Email address'
         ],
+        snackbar: false,
     }),
     methods: {
         processLogin() {
             this.$refs.loginForm.validate()
                 .then(data => {
                     if (data.valid) {
-                        // this.$socketio.emit('login', this.email)
-                        
                         this.axios.post('http://localhost:4000/users/login', {
                             'email': this.email
                         }).then((response) => {
-                            console.log(response.data);
-                            localStorage.setItem('token', response.data.token);
-                            localStorage.setItem('login', response.data.login);
                             this.$store.dispatch('setUser', response.data)
+                            this.$router.replace('/')
                         })
-                        .catch(function (error) {
-                            console.log(error);
+                        .catch((error) => {
+                            this.snackbar = true
                         });
-                        this.$router.replace('/')
                     }
                 })
         }
