@@ -59,7 +59,7 @@
     methods: {
       logout() {
         this.axios.post('http://localhost:4000/users/logout', {},  {
-                headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } 
+                headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
             })
             .then(() => {
               this.$router.replace('/login');

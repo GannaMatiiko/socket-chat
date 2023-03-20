@@ -22,7 +22,7 @@
         },
         data() {
             return {
-                chatMessages: []
+                // chatMessages: []
                 // chatMessages: [
                 //     {
                 //         id: "63f3d8b3283c18ee1e7daa26",
@@ -92,11 +92,13 @@
         },
         computed: {
             getUser() {
-                return this.$store.getters.getSelectedUser
+                // return this.$store.getters.getSelectedUser
+                // TODO get real selected user id
+                return true
             },
-            // chatMessages() {
-            //     return this.$store.getters.getChatMessages;
-            // }
+            chatMessages() {
+                return this.$store.getters.getChatMessages;
+            }
         },
         created() {
             console.log('created');
