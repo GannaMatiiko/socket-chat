@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar">
-        <UserCard v-for="chat in chatsList" :chat="chat" :key="chat.id"></UserCard>
+        <UserCard v-for="user in users" :user="user" :key="user.id"></UserCard>
     </div>
     </template>
 
@@ -12,40 +12,41 @@
         },
         data() {
             return {
-                chatsList: [
-                {
-                    id: "wdok7733",
-                    name: "General channel",
-                    type: "room",
-                    isGeneral: true,
-                    members: [
-                        "Valeriy",
-                        "Boris",
-                        "Hanna",
-                        "Messi",
-                        "Foorest Gump"
-                    ]
-                },
-                {
-                    id: "9f939ukkss133",
-                    name: "Valeriy",
-                    type: "private"
-                },
-                {
-                    id: "n6n65n",
-                    name: "Gachimeni",
-                    type: "room",
-                    members: [
-                        "Valeriy",
-                        "Hanna"
-                    ]
-                },
-                {
-                    id: "oosdosdo",
-                    name: "Boris",
-                    type: "private"
-                }
-            ]
+                users: []
+            //     chatsList: [
+            //     {
+            //         id: "wdok7733",
+            //         name: "General channel",
+            //         type: "room",
+            //         isGeneral: true,
+            //         members: [
+            //             "Valeriy",
+            //             "Boris",
+            //             "Hanna",
+            //             "Messi",
+            //             "Foorest Gump"
+            //         ]
+            //     },
+            //     {
+            //         id: "9f939ukkss133",
+            //         name: "Valeriy",
+            //         type: "private"
+            //     },
+            //     {
+            //         id: "n6n65n",
+            //         name: "Gachimeni",
+            //         type: "room",
+            //         members: [
+            //             "Valeriy",
+            //             "Hanna"
+            //         ]
+            //     },
+            //     {
+            //         id: "oosdosdo",
+            //         name: "Boris",
+            //         type: "private"
+            //     }
+            // ]
             }
         },
     }

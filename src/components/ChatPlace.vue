@@ -99,12 +99,6 @@
             chatMessages() {
                 return this.$store.getters.getChatMessages;
             }
-        },
-        created() {
-            console.log('created');
-            this.$socketio.on('loadDefaultChatMessages', (data) => {
-                console.log('data inside created', data);
-            })
         }
     }
 </script>

@@ -1,20 +1,20 @@
 <template>
-    <div @click="selectUser(chat.id)" class="user-card" :class="{active: isCurrUserActive}">
-        <span v-if="chat.isGeneral">
+    <div @click="selectUser(user.id)" class="user-card" :class="{active: isCurrUserActive}">
+        <span v-if="user.isGeneral">
             <img class="user-img" src="@/assets/general.png">
         </span>
         <span v-else>
-            <span class="user-img" :style="getRandomColor">{{ createInitials(chat.name) }}</span>
+            <span class="user-img" :style="getRandomColor">{{ createInitials(user.name) }}</span>
         </span>
 
-        <div class="user-name">{{ chat.name }}</div>
+        <div class="user-name">{{ user.name }}</div>
     </div>
 </template>
 
 <script>
     export default {
         props: {
-            chat: {
+            user: {
                 type: Object,
             }
         },

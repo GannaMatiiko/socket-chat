@@ -26,7 +26,6 @@ import moment from 'moment';
         },
         methods: {
             sendMessage() {
-                this.$socketio.emit('chat message', this.messageText);
                 this.$store.dispatch('appendMessage', {
                     id: this.$store.getters.getSelectedUser,
                     user: "Valeriy",

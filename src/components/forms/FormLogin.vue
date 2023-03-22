@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import socket from '@/plugins/socket.js'
 export default {
     data: () => ({
         email: '',
@@ -40,8 +41,11 @@ export default {
                         this.axios.post('http://localhost:4000/users/login', {
                             'email': this.email
                         }).then((response) => {
-                            this.$store.dispatch('setUser', response.data)
-                            this.$router.replace('/')
+                            this.$store.dispatch('setUser', response.data);
+                            this.$router.replace('/');
+                            console.log('response data', response.data);
+                            socket.auth = { token: response.data.token };
+                            socket.connect();
                         })
                         .catch((error) => {
                             this.snackbar = true

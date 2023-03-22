@@ -14,13 +14,13 @@ import { createApp } from 'vue'
 import { registerPlugins } from '@/plugins'
 import store from './store/index.js';
 import router from './router/index.js';
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 import axios from 'axios'
 
 import BaseForm from './components/ui/BaseForm.vue';
 
 const app = createApp(App)
-app.config.globalProperties.$socketio = io(import.meta.env.VITE_VUE_APP_SOCKET_ENDPOINT);
+// app.config.globalProperties.$socketio = io(import.meta.env.VITE_VUE_APP_SOCKET_ENDPOINT);
 app.config.globalProperties.axios=axios
 
 // TODO transfer to external file

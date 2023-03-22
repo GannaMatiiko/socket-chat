@@ -1,8 +1,8 @@
 <template>
-  <HelloWorld />
+  <HomeLayout />
 </template>
 
 <script setup>
-  import HelloWorld from '@/components/HelloWorld.vue'
+  import HomeLayout from '@/components/HomeLayout.vue'
 </script>
 
