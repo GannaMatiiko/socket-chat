@@ -1,12 +1,13 @@
 <template>
-    <v-form @submit.prevent="sendMessage" class="send-form">
-        <v-textarea @keydown.enter.prevent="sendMessage" v-model="messageText" label="Write a message" variant="outlined" no-resize :messages="showChatCommands"></v-textarea>
+    <v-form @submit.prevent="sendMessageText" class="send-form">
+        <v-textarea @keydown.enter.prevent="sendMessageText" v-model="messageText" label="Write a message" variant="outlined" no-resize :messages="showChatCommands"></v-textarea>
         <v-btn type="submit" class="send-form__btn mt-2">Send</v-btn>
     </v-form>
 </template>
 
 <script>
 import moment from 'moment';
+import socket from '@/plugins/socket.js'
     export default {
         data() {
             return {
@@ -25,7 +26,7 @@ import moment from 'moment';
             }
         },
         methods: {
-            sendMessage() {
+            sendMessageText() {
                 this.$store.dispatch('appendMessage', {
                     id: this.$store.getters.getSelectedUser,
                     user: "Valeriy",
@@ -34,6 +35,8 @@ import moment from 'moment';
                     // date: "2023-02-21 19:22:44"
                     // date: moment().format('[today] HH:mm')
                 });
+                console.log('before socket Send Message');
+                socket.emit('sendMessage', this.messageText);
                 this.messageText = ''
             }
         }

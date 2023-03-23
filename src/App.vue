@@ -8,6 +8,12 @@ export default {
   name: 'App',
   components: {},
   created() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      socket.auth = { token };
+      socket.connect();
+    }
+
     socket.on("connect_error", (err) => {
       if (err.message === "invalid username") {
         this.usernameAlreadySelected = false;
