@@ -13,11 +13,7 @@ export default {
     components: {
         UserMessage
     },
-    props: {
-        msg: {
-            type: Array
-        }
-    }
+    props: ['msg']
 }
 </script>
 

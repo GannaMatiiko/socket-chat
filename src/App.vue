@@ -15,12 +15,12 @@ export default {
     }
 
     socket.on("connect_error", (err) => {
-      if (err.message === "invalid username") {
-        this.usernameAlreadySelected = false;
+      if (err.message === "error user") {
+        console.log('Oops, connect error');
       }
     });
   },
-  destroyed() {
+  unmounted() {
     socket.off("connect_error");
   },
 }

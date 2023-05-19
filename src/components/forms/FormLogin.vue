@@ -46,9 +46,11 @@ export default {
                             console.log('response data', response.data);
                             socket.auth = { token: response.data.token };
                             socket.connect();
+                            console.log('socket connect', socket.connect);
                         })
                         .catch((error) => {
-                            this.snackbar = true
+                            this.snackbar = true;
+                            throw new Error(error.message);
                         });
                     }
                 })

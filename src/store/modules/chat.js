@@ -10,7 +10,7 @@ export default {
     //         return state.selectedUser
     //     },
         getChatMessages(state) {
-            return state.chatMessages
+            return state.chatMessages;
         }
     },
     actions: {

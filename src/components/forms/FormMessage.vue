@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+// import moment from 'moment';
 import socket from '@/plugins/socket.js'
     export default {
         data() {
