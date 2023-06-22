@@ -32,11 +32,14 @@ router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.getItem('token') !== null
   if (to.name !== 'Login' && !isAuthenticated) {
    next({ name: 'Login' }) 
+   return;
   }
   if (to.name === 'Login' && isAuthenticated) {
     next({ name: 'Home' })
+    return;
   } 
   else next()
+  return;
 })
 
 export default router

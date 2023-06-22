@@ -2,7 +2,9 @@ export default {
     state() {
         return {
             // selectedUser: null,
-            chatMessages: []
+            chatMessages: [],
+            chatRooms: [],
+            activeRoomId: null
         }
     },
     getters: {
@@ -11,6 +13,12 @@ export default {
     //     },
         getChatMessages(state) {
             return state.chatMessages;
+        },
+        loadChatRooms(state) {
+            return state.chatRooms;
+        },
+        getActiveRoomId(state) {
+            return state.activeRoomId;
         }
     },
     actions: {
@@ -20,6 +28,12 @@ export default {
         // },
         appendMessage({commit}, text) {
             commit('appendMessage', text)
+        },
+        loadChatRooms({commit}, chatRooms) {
+            commit('loadChatRooms', chatRooms)
+        },
+        storeActiveRoomId({commit}, roomId) {
+            commit('storeActiveRoomId', roomId);
         }
     },
     mutations: {
@@ -28,6 +42,12 @@ export default {
         // },
         appendMessage(state, text) {
             state.chatMessages.push(text)
+        },
+        loadChatRooms(state, rooms) {
+            state.chatRooms = rooms;
+        },
+        storeActiveRoomId(state, roomId) {
+            state.activeRoomId = roomId;
         }
     }
 }

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import socket from '@/plugins/socket.js'
+// import socket from '@/plugins/socket.js'
 export default {
     data: () => ({
         email: '',
@@ -44,9 +44,9 @@ export default {
                             this.$store.dispatch('setUser', response.data);
                             this.$router.replace('/');
                             console.log('response data', response.data);
-                            socket.auth = { token: response.data.token };
-                            socket.connect();
-                            console.log('socket connect', socket.connect);
+                            // socket.auth = { token: response.data.token };
+                            // socket.connect();
+                            // console.log('socket connect', socket.connect);
                         })
                         .catch((error) => {
                             this.snackbar = true;
