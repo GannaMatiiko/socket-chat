@@ -9,6 +9,9 @@
 
       <v-spacer></v-spacer>
 
+      <!-- show if we have selected group -->
+      <UserList></UserList>
+
       <v-btn variant="text" icon="mdi-account-multiple-plus"></v-btn>
 
       <v-btn variant="text" icon="mdi-cog"></v-btn>
@@ -27,7 +30,11 @@
     </v-navigation-drawer>
 </template>
 <script>
+import UserList from '@/components/user/UserList.vue'
   export default {
+    components: {
+      UserList
+    },
     data: () => ({
       drawer: false,
       group: null,

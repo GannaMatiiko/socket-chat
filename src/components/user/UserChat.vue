@@ -1,11 +1,11 @@
 <template>
     <UserMessage>
-        <template #author>{{ msg.postedByUser.login }}</template>
+        <template #author>{{ msg.login }}</template>
         <template #text >
             <span>
-            {{ msg.message }}</span>
+            {{ msg.text }}</span>
         </template>
-        <template #time>{{ formatTimeView }}</template>
+        <template #time>{{ msg.createdAt }}</template>
     </UserMessage>
 
 </template>
@@ -18,9 +18,9 @@ export default {
     },
     props: ['msg'],
     computed: {
-        formatTimeView() {
-            return this.msg.createdAt.split('T').join(' ').slice(0, -5);
-        }
+        // formatTimeView() {
+        //     return this.msg.createdAt.split('T').join(' ').slice(0, -5);
+        // }
     }
 }
 </script>

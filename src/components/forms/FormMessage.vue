@@ -61,12 +61,13 @@ import socket from '@/plugins/socket.js'
             sendMessageText() {
                 this.checkSpecialChatCommands(this.messageText);
                 this.$store.dispatch('appendMessage', {
-                    id: this.$store.getters.getSelectedUser,
-                    user: "Valeriy",
-                    roomId: "general",
+                    // id: this.$store.getters.getSelectedUser,
+                    login: localStorage.getItem('login'),
                     text: this.messageText,
+                    createdAt: format(new Date(), 'yyyy-MM-DDD HH:mm:ss'),
+                    isAuthorOwner: true,
+                    isServiceMessage: false,
                     styled: true
-                    // date: "2023-02-21 19:22:44"
                     // date: moment().format('[today] HH:mm')
                 });
                

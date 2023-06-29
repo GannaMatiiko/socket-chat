@@ -6,7 +6,9 @@ export default {
         }
     },
     getters: {
-        
+        getUserName(state) {
+            return state.user;
+        }
     },
     actions: {
         setUser({commit}, userData) {
