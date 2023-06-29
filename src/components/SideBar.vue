@@ -25,17 +25,20 @@
                 this.$store.dispatch('storeActiveRoomId', roomId);
             },
             selectChatInfo(roomId) {
+                if (this.$store.getters.getActiveRoomId === roomId) {
+                    return
+                }
+                
                 this.selectCurrentRoomId(roomId);
 
                 this.axios.get(`http://localhost:4000/room/${roomId}`, {
                     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
                 })
-                .then(res => console.log('555', res.data))
+                .then(res => this.$store.dispatch('loadRoomsMessages', res.data.conversation))
                 .catch(error => console.error(error))
                 }
         },
         mounted() {
-            console.log(this.$store.getters.getActiveRoomId);
             this.axios.get('http://localhost:4000/users/chat-rooms', {
                 headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
             })

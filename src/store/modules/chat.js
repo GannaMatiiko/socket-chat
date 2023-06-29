@@ -34,6 +34,9 @@ export default {
         },
         storeActiveRoomId({commit}, roomId) {
             commit('storeActiveRoomId', roomId);
+        },
+        loadRoomsMessages({commit}, messages) {
+            commit('loadRoomsMessages', messages);
         }
     },
     mutations: {
@@ -48,6 +51,9 @@ export default {
         },
         storeActiveRoomId(state, roomId) {
             state.activeRoomId = roomId;
+        },
+        loadRoomsMessages(state, messages) {
+            state.chatMessages = messages;
         }
     }
 }

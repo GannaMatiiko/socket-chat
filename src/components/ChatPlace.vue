@@ -3,7 +3,7 @@
         <div v-if="!getUser" class="chatplace-text">Choose chat to begin</div>
         <div v-else >
             <div class="chatplace-messages">
-                <UserChat v-for="msg in chatMessages" :msg="msg" :key="msg.id"></UserChat>
+                <UserChat v-for="msg in chatMessages" :msg="msg" :key="msg._id"></UserChat>
             </div>
             <div class="chatplace-textarea">
                 <FormMessage></FormMessage>

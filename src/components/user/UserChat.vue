@@ -1,11 +1,11 @@
 <template>
     <UserMessage>
-        <template #author>{{ msg.user }}</template>
+        <template #author>{{ msg.postedByUser.login }}</template>
         <template #text >
-            <span :class="{'styled-text': msg.styled}">
-            {{ msg.text }}</span>
+            <span>
+            {{ msg.message }}</span>
         </template>
-        <template #time>{{ msg.date }}</template>
+        <template #time>{{ formatTimeView }}</template>
     </UserMessage>
 
 </template>
@@ -16,12 +16,12 @@ export default {
     components: {
         UserMessage
     },
-    props: ['msg']
+    props: ['msg'],
+    computed: {
+        formatTimeView() {
+            return this.msg.createdAt.split('T').join(' ').slice(0, -5);
+        }
+    }
 }
 </script>
 
-<style lang="scss">
-    .styled-text {
-        font-weight: 700;
-    }
-</style>
