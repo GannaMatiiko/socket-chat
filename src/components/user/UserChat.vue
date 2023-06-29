@@ -16,12 +16,7 @@ export default {
     components: {
         UserMessage
     },
-    props: ['msg'],
-    computed: {
-        // formatTimeView() {
-        //     return this.msg.createdAt.split('T').join(' ').slice(0, -5);
-        // }
-    }
+    props: ['msg']
 }
 </script>
 

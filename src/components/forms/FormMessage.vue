@@ -14,6 +14,7 @@ import socket from '@/plugins/socket.js'
             return {
                 messageText: '',
                 chatType: 'room',
+                isServiceMessage: false,
                 chatCommands: [
                     '/date',
                     '/me some string',
@@ -56,6 +57,7 @@ import socket from '@/plugins/socket.js'
                     console.log('ME!!!');
                     const userName = localStorage.getItem('login');
                     this.messageText = `${userName.toUpperCase()} ${value.slice(4)}`
+                    this.isServiceMessage = true;
                 }
             },
             sendMessageText() {
@@ -66,13 +68,12 @@ import socket from '@/plugins/socket.js'
                     text: this.messageText,
                     createdAt: format(new Date(), 'yyyy-MM-DDD HH:mm:ss'),
                     isAuthorOwner: true,
-                    isServiceMessage: false,
+                    isServiceMessage: this.isServiceMessage,
                     styled: true
-                    // date: moment().format('[today] HH:mm')
                 });
                
                 console.log('before socket Send Message'); 
-                socket.emit('sendMessage', this.messageText, '1be7db8a32ab40fd9f45a860b5540ba9');   
+                socket.emit('sendMessage', this.messageText, '1be7db8a32ab40fd9f45a860b5540ba9', this.isServiceMessage);   
                 this.messageText = ''
             }
         }
