@@ -6,8 +6,6 @@ const socket = io(URL, {
 transportOptions: {
 polling: {
  extraHeaders: {
-   //todo тут реальный токен юзера подставить
-   //todo во второй итерации (когда тут заработает) Authorization заменить на authToken и слать сразу токен без Bearer и пробела
    'token': localStorage.getItem('token'),
  },
 },
