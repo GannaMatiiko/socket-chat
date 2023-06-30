@@ -46,6 +46,9 @@ import socket from '@/plugins/socket.js'
         computed: {
             showChatCommands() {
                 return this.chatType === 'room' ? this.chatCommands : this.chatCommands.slice(0, 2)
+            },
+            chatRoomId() {
+                return this.$store.getters.getActiveRoomId;
             }
         },
         methods: {            
@@ -71,7 +74,7 @@ import socket from '@/plugins/socket.js'
                 });
                
                 console.log('before socket Send Message'); 
-                socket.emit('sendMessage', this.messageText, this.$store.getters.activeRoomId, this.isServiceMessage);   
+                socket.emit('sendMessage', this.messageText, this.chatRoomId, this.isServiceMessage);   
                 this.messageText = ''
             }
         }
