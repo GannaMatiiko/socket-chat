@@ -4,6 +4,7 @@ export default {
             // selectedUser: null,
             chatMessages: [],
             chatRooms: [],
+            chanelUsers: [],
             activeRoomId: null
         }
     },
@@ -19,6 +20,9 @@ export default {
         },
         getActiveRoomId(state) {
             return state.activeRoomId;
+        },
+        getChanelUsers(state) {
+            return state.chanelUsers;
         }
     },
     actions: {
@@ -35,8 +39,11 @@ export default {
         storeActiveRoomId({commit}, roomId) {
             commit('storeActiveRoomId', roomId);
         },
-        loadRoomsMessages({commit}, messages) {
-            commit('loadRoomsMessages', messages);
+        loadRoomMessages({commit}, messages) {
+            commit('loadRoomMessages', messages);
+        },
+        loadRoomMembers({commit}, users) {
+            commit('loadRoomMembers', users);
         }
     },
     mutations: {
@@ -52,8 +59,11 @@ export default {
         storeActiveRoomId(state, roomId) {
             state.activeRoomId = roomId;
         },
-        loadRoomsMessages(state, messages) {
+        loadRoomMessages(state, messages) {
             state.chatMessages = messages;
+        },
+        loadRoomMembers(state, users) {
+            state.chanelUsers = users;
         }
     }
 }

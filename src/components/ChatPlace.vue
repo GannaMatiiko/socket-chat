@@ -2,7 +2,6 @@
     <div class="chatplace">
         <div v-if="!getUser" class="chatplace-text">Choose chat to begin</div>
         <div v-else >
-            <!-- <UserList></UserList> -->
             <div class="chatplace-messages">
                 <UserChat v-for="msg in chatMessages" :msg="msg" :key="msg._id"></UserChat>
             </div>
@@ -25,7 +24,6 @@
         },
         data() {
             return {
-                // chatMessages: []
             }
         },
         computed: {

@@ -12,7 +12,12 @@
 
             <v-card>
                 <v-card-text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <v-list lines="one">
+                      <v-list-item
+                        v-for="user in roomUsers"
+                        :key="user._id"
+                      >{{ user.login }}</v-list-item>
+                    </v-list>
                 </v-card-text>
                 <v-card-actions>
                     <v-btn color="light-green-darken-4" block @click="dialog = false">Close Dialog</v-btn>
@@ -29,5 +34,10 @@
         dialog: false,
       }
     },
+    computed: {
+      roomUsers() {
+        return this.$store.getters.getChanelUsers;
+      }
+    }
   }
 </script>

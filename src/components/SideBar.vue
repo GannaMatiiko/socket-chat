@@ -34,7 +34,10 @@
                 this.axios.get(`http://localhost:4000/room/${roomId}`, {
                     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
                 })
-                .then(res => this.$store.dispatch('loadRoomsMessages', res.data.conversation))
+                .then(res => {
+                    this.$store.dispatch('loadRoomMessages', res.data.conversation);
+                    this.$store.dispatch('loadRoomMembers', res.data.users);
+                })
                 .catch(error => console.error(error))
                 }
         },

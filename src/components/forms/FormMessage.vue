@@ -63,17 +63,15 @@ import socket from '@/plugins/socket.js'
             sendMessageText() {
                 this.checkSpecialChatCommands(this.messageText);
                 this.$store.dispatch('appendMessage', {
-                    // id: this.$store.getters.getSelectedUser,
                     login: localStorage.getItem('login'),
                     text: this.messageText,
                     createdAt: format(new Date(), 'yyyy-MM-DDD HH:mm:ss'),
                     isAuthorOwner: true,
                     isServiceMessage: this.isServiceMessage,
-                    styled: true
                 });
                
                 console.log('before socket Send Message'); 
-                socket.emit('sendMessage', this.messageText, '1be7db8a32ab40fd9f45a860b5540ba9', this.isServiceMessage);   
+                socket.emit('sendMessage', this.messageText, this.$store.getters.activeRoomId, this.isServiceMessage);   
                 this.messageText = ''
             }
         }

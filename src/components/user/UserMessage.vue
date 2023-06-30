@@ -1,5 +1,5 @@
 <template>
-    <div class="message-wrapper">
+    <div class="message-wrapper" :class="{'me': msg.isAuthorOwner}">
         <div>
             <span class="message-author">
                 <slot name="author"></slot>
@@ -8,11 +8,17 @@
                 <slot name="time"></slot>
             </span>  
         </div>
-        <div class="message-text">
+        <div class="message-text" :class="{'me': msg.isAuthorOwner, 'service-message': msg.isServiceMessage}">
             <slot name="text"></slot>
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        props: ['msg']
+    }
+</script>
 
 <style lang="scss" scoped>
     .message {
@@ -48,6 +54,11 @@
             border-radius:5px;
             &.me {
                 background: $lightGreen;
+            }
+            &.service-message {
+                font-style: italic;
+                font-weight: 700;
+                border: 2px solid $darkGreen;
             }
         }
     }
