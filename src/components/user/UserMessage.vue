@@ -49,7 +49,6 @@
             &.me {
                 background: $lightGreen;
             }
-
         }
     }
 </style>

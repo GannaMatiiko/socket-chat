@@ -26,71 +26,6 @@
         data() {
             return {
                 // chatMessages: []
-                // chatMessages: [
-                //     {
-                //         id: "63f3d8b3283c18ee1e7daa26",
-                //         user: "Valeriy",
-                //         roomId: "general",
-                //         text: "hello",
-                //         date: "2023-02-21 19:22:44"
-                //     },
-                //     {
-                //         id: "nadfnj23njin4fjbk",
-                //         user: "Boris",
-                //         roomId: "general",
-                //         text: "dobriy den evrybody",
-                //         date: "2023-02-21 19:22:44"
-                //     },
-                //     {
-                //         id: "gfggege",
-                //         user: "Boris",
-                //         roomId: "general",
-                //         text: "i don't believe In terms of technical expectations, I am looking for a company that actively works with modern web technologies and frameworks, including React and Redux. I am excited to work on projects that challenge me and allow me to develop my skills further. Additionally, I am eager to work with a team that values clean and well-structured code.",
-                //         date: "2023-02-21 19:22:49"
-                //     },
-                //     {
-                //         id: "63f3d8b3283c18ee1e7daa26",
-                //         user: "Valeriy",
-                //         roomId: "general",
-                //         text: "hello",
-                //         date: "2023-02-21 19:22:44"
-                //     },
-                //     {
-                //         id: "nadfnj23njin4fjbk",
-                //         user: "Boris",
-                //         roomId: "general",
-                //         text: "dobriy den evrybody",
-                //         date: "2023-02-21 19:22:44"
-                //     },
-                //     {
-                //         id: "gfggege",
-                //         user: "Boris",
-                //         roomId: "general",
-                //         text: "i don't believe In terms of technical expectations, I am looking for a company that actively works with modern web technologies and frameworks, including React and Redux. I am excited to work on projects that challenge me and allow me to develop my skills further. Additionally, I am eager to work with a team that values clean and well-structured code.",
-                //         date: "2023-02-21 19:22:49"
-                //     },
-                //     {
-                //         id: "63f3d8b3283c18ee1e7daa26",
-                //         user: "Valeriy",
-                //         roomId: "general",
-                //         text: "hello",
-                //         date: "2023-02-21 19:22:44"
-                //     },
-                //     {
-                //         id: "nadfnj23njin4fjbk",
-                //         user: "Boris",
-                //         roomId: "general",
-                //         text: "dobriy den evrybody",
-                //         date: "2023-02-21 19:22:44"
-                //     },
-                //     {
-                //         id: "gfggege",
-                //         user: "Boris",
-                //         roomId: "general",
-                //         text: "i don't believe In terms of technical expectations, I am looking for a company that actively works with modern web technologies and frameworks, including React and Redux. I am excited to work on projects that challenge me and allow me to develop my skills further. Additionally, I am eager to work with a team that values clean and well-structured code.",
-                //         date: "2023-02-21 19:22:49"
-                //     }
-                // ]
             }
         },
         computed: {
@@ -100,7 +35,7 @@
                 return true
             },
             chatMessages() {
-                return this.$store.getters.getChatMessages;
+                return this.$store.getters.getChatMessages;  
             }
         }
     }

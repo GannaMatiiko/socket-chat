@@ -1,5 +1,5 @@
 <template>
-    <UserMessage>
+    <UserMessage :class="{'me': msg.isAuthorOwner}">
         <template #author>{{ msg.login }}</template>
         <template #text >
             <span>
