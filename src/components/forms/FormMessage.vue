@@ -49,6 +49,9 @@ import socket from '@/plugins/socket.js'
             },
             chatRoomId() {
                 return this.$store.getters.getActiveRoomId;
+            },
+            roomUsers() {
+                return this.$store.getters.getChanelUsers;
             }
         },
         methods: {            
@@ -61,6 +64,10 @@ import socket from '@/plugins/socket.js'
                     const userName = localStorage.getItem('login');
                     this.messageText = `${userName.toUpperCase()} ${value.slice(4)}`
                     this.isServiceMessage = true;
+                }
+                if (value === '/show members') {
+                    console.log('SHHOW MEMBERES!');
+                    this.messageText = `Chat members: ${this.roomUsers.map(user => user.login).join(', ')}`;
                 }
             },
             sendMessageText() {

@@ -1,6 +1,6 @@
 <template>
     <div class="chatplace">
-        <div v-if="!getUser" class="chatplace-text">Choose chat to begin</div>
+        <div v-if="!roomChosen" class="chatplace-text">Choose chat to begin</div>
         <div v-else >
             <div class="chatplace-messages">
                 <UserChat v-for="msg in chatMessages" :msg="msg" :key="msg._id"></UserChat>
@@ -27,10 +27,8 @@
             }
         },
         computed: {
-            getUser() {
-                // return this.$store.getters.getSelectedUser
-                // TODO get real selected user id
-                return true
+            roomChosen() {
+                return this.$store.getters.getActiveRoomId;
             },
             chatMessages() {
                 return this.$store.getters.getChatMessages;  
