@@ -4,6 +4,8 @@
         <div v-else >
             <div class="chatplace-messages">
                 <UserChat v-for="msg in chatMessages" :msg="msg" :key="msg._id"></UserChat>
+                <!-- bottom place where scroll to -->
+                <p ref="bottomRef"></p>
             </div>
             <div class="chatplace-textarea">
                 <FormMessage></FormMessage>
@@ -33,7 +35,12 @@
             chatMessages() {
                 return this.$store.getters.getChatMessages;  
             }
-        }
+        },
+        updated() {
+            // scroll to the end of chat
+            let bottomRef = this.$refs.bottomRef;
+            bottomRef.scrollIntoView({block: "end", behavior: "smooth"});
+        },
     }
 </script>
 
@@ -51,7 +58,7 @@
             color: $darkGreen;
         }
         &-messages {
-            padding: 30px;
+            padding: 30px 30px 0 30px;
             max-height: 69vh;
             height: 69vh;
             overflow-y: scroll;

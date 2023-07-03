@@ -24,7 +24,7 @@
     .message {
         &-wrapper {
             margin-bottom: 20px;
-            &:last-child {
+            &:nth-last-child(2) {
                 margin-bottom: 0;
             }
             &.me {

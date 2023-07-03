@@ -70,6 +70,10 @@ import socket from '@/plugins/socket.js'
                     this.messageText = `Chat members: ${this.roomUsers.map(user => user.login).join(', ')}`;
                 }
             },
+            scrollToChatboxEnd() {
+                let bottomRef = this.$parent.$refs.bottomRef;
+                this.$nextTick(() => bottomRef.scrollIntoView({block: "end", behavior: "smooth"}))
+            },
             sendMessageText() {
                 this.checkSpecialChatCommands(this.messageText);
                 this.$store.dispatch('appendMessage', {
@@ -81,8 +85,9 @@ import socket from '@/plugins/socket.js'
                 });
                
                 console.log('before socket Send Message'); 
-                socket.emit('sendMessage', this.messageText, this.chatRoomId, this.isServiceMessage);   
-                this.messageText = ''
+                socket.emit('sendMessage', this.messageText, this.chatRoomId, this.isServiceMessage);
+                this.scrollToChatboxEnd();  
+                this.messageText = '';
             }
         }
     }
