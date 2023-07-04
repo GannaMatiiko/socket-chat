@@ -28,6 +28,10 @@ export default {
         logoutUser(state) {
             state.user = null;
             state.token = null;
+            this.state.chat.chatMessages = [];
+            this.state.chat.chanelUsers = [];
+            this.state.chat.chatRooms = [];
+            this.state.chat.activeRoomId = [];
             localStorage.removeItem('token');
             localStorage.removeItem('login');
         }
