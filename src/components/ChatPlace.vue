@@ -2,7 +2,7 @@
     <div class="chatplace">
         <div v-if="!roomChosen" class="chatplace-text">Choose chat to begin</div>
         <div v-else >
-            <div class="chatplace-messages">
+            <div class="chatplace-messages" ref="chatplaceMessages" @scroll="fetchChatHistory">
                 <UserChat v-for="msg in chatMessages" :msg="msg" :key="msg._id"></UserChat>
                 <!-- bottom place where scroll to -->
                 <p ref="bottomRef"></p>
@@ -17,15 +17,17 @@
 <script>
     import UserChat from './user/UserChat.vue'
     import FormMessage from './forms/FormMessage.vue'
-    // import UserList from './UserList.vue'
     export default {
         components: {
             UserChat,
             FormMessage,
-            // UserList
         },
         data() {
             return {
+                pageToFetch: 1,
+                toFireScroll: true,
+                isMessageEnded: false,
+                messagesPerPage: 8
             }
         },
         computed: {
@@ -36,8 +38,45 @@
                 return this.$store.getters.getChatMessages;  
             }
         },
+        watch: {
+            roomChosen() {
+                this.pageToFetch = 1;
+                this.isMessageEnded = false;
+                this.toFireScroll = true;
+            }
+        },
+        methods: {
+            fetchChatHistory() {
+                if (this.$refs.chatplaceMessages.scrollTop === 0) {
+                    let initialHeight = this.$refs.chatplaceMessages.scrollHeight;
+                    this.toFireScroll = false;
+                    this.pageToFetch += 1;
+
+                    if (!this.isMessageEnded) {
+                        this.axios.get(`http://localhost:4000/room/${this.roomChosen}/?page=${this.pageToFetch}`, {
+                            headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
+                        })
+                        .then(res => {
+                            // to avoid unnecessary request to server
+                            if (res.data.conversation.length < this.messagesPerPage) {
+                                this.isMessageEnded = true
+                            }
+                            this.$store.dispatch('loadRoomMessagesRecent', res.data.conversation);
+
+                            // to store previous chat scroll position on load recent messages
+                            this.$nextTick(() => {
+                                this.$refs.chatplaceMessages.scrollTop = this.$refs.chatplaceMessages.scrollHeight - initialHeight;
+                            })
+                        })
+                        .catch(error => console.error(error));
+                    }
+                }
+            }
+        },
         updated() {
             // scroll to the end of chat
+            if (!this.toFireScroll) return;
+
             let bottomRef = this.$refs.bottomRef;
             bottomRef.scrollIntoView({block: "end", behavior: "smooth"});
         },

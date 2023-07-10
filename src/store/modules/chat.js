@@ -42,9 +42,12 @@ export default {
         loadRoomMessages({commit}, messages) {
             commit('loadRoomMessages', messages);
         },
+        loadRoomMessagesRecent({commit}, messages) {
+            commit('loadRoomMessagesRecent', messages);
+        },
         loadRoomMembers({commit}, users) {
             commit('loadRoomMembers', users);
-        }
+        },
     },
     mutations: {
         // setUser(state, id) {
@@ -61,6 +64,9 @@ export default {
         },
         loadRoomMessages(state, messages) {
             state.chatMessages = messages;
+        },
+        loadRoomMessagesRecent(state, messages) {
+            state.chatMessages.unshift(...messages);
         },
         loadRoomMembers(state, users) {
             state.chanelUsers = users;
