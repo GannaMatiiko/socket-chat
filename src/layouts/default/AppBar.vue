@@ -10,11 +10,12 @@
       <v-spacer></v-spacer>
 
       <!-- show if we have selected group -->
-      <UserList></UserList>
+      <UserListModal></UserListModal>
 
       <v-btn variant="text" icon="mdi-account-multiple-plus"></v-btn>
 
-      <v-btn variant="text" icon="mdi-cog"></v-btn>
+      <!-- <v-btn variant="text" icon="mdi-cog"></v-btn> -->
+      <UserSettingsModal></UserSettingsModal>
 
       <v-btn @click="logout" variant="text" icon="mdi-logout"></v-btn>
     </v-app-bar>
@@ -30,10 +31,12 @@
     </v-navigation-drawer>
 </template>
 <script>
-import UserList from '@/components/user/UserList.vue'
+import UserListModal from '@/components/user/UserListModal.vue';
+import UserSettingsModal from '@/components/user/UserSettingsModal.vue';
   export default {
     components: {
-      UserList
+      UserListModal,
+      UserSettingsModal
     },
     data: () => ({
       drawer: false,
