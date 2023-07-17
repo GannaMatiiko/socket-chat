@@ -8,10 +8,9 @@
                 <v-btn variant="text" icon="mdi-account-multiple-plus" v-bind="props"></v-btn>
             </template>
 
-            <v-card>
+            <v-card title="Create group chat">
               <v-form @submit.prevent="createGroupChat" v-model="valid">
                 <v-card-text>
-                    Create group chat
                     <v-text-field
                         v-model="chatName"
                         label="Chat name"

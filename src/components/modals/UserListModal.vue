@@ -4,13 +4,13 @@
             v-model="dialog"
             width="40%"
             >
-            <template v-slot:activator="{ props }">
+            <template v-if="isRoomIdSelected" v-slot:activator="{ props }">
                 <v-btn color="" v-bind="props">
                     Show members
                 </v-btn>
             </template>
 
-            <v-card>
+            <v-card title="Chat members">
                 <v-card-text>
                     <v-list lines="one">
                       <v-list-item
@@ -37,6 +37,9 @@
     computed: {
       roomUsers() {
         return this.$store.getters.getChanelUsers;
+      },
+      isRoomIdSelected() {
+        return this.$store.getters.getActiveRoomId;
       }
     }
   }

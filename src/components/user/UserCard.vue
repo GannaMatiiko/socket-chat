@@ -10,6 +10,20 @@
             <span class="user-img" :style="getRandomColor">{{ createInitials(user.name) }}</span>
         </span> -->
 
+        <v-icon
+            v-if="user.isDialogue"
+            size="default"
+            color="lime-darken-3"
+            icon="mdi-account-multiple"
+            class="mr-1"
+        ></v-icon>
+        <v-icon
+            v-else
+            size="default"
+            color="orange-darken-1"
+            icon="mdi-bullhorn"
+            class="mr-1"
+        ></v-icon>
         <div class="user-name">{{ user.name }}</div>
     </div>
 </template>

@@ -8,11 +8,8 @@
                 <v-btn variant="text" icon="mdi-cog" v-bind="props"></v-btn>
             </template>
 
-            <v-card>
+            <v-card title="Manage your chat history">
                 <v-card-text>
-                    Manage your chat history
-                    | {{ daysToStore }} days
-                    | {{ messagesToStore }} messages
                     <div class="d-flex mt-5">
                         <v-radio-group label="How long" v-model="daysToStore">
                             <v-radio label="1 day" value="1"></v-radio>
