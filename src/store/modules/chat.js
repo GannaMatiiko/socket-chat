@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export default {
     state() {
         return {
@@ -5,7 +7,7 @@ export default {
             chatMessages: [],
             chatRooms: [],
             chanelUsers: [],
-            activeRoomId: null
+            activeRoomId: null,
         }
     },
     getters: {
@@ -48,6 +50,19 @@ export default {
         loadRoomMembers({commit}, users) {
             commit('loadRoomMembers', users);
         },
+        async loadAllUsers(context) {
+            try {
+                const res = await axios.get(`http://localhost:4000/users`, {
+                    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
+                })
+                await context.commit('loadRoomMembers', res.data.users);
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        addNewChat({commit}, chatRoom) {
+            commit('addNewChat', chatRoom);
+        }
     },
     mutations: {
         // setUser(state, id) {
@@ -70,6 +85,13 @@ export default {
         },
         loadRoomMembers(state, users) {
             state.chanelUsers = users;
+        },
+        addNewChat(state, chatRoom) {
+            let newChat = {
+                _id: chatRoom._id,
+                name: chatRoom.name
+            }
+            state.chatRooms.push(newChat);
         }
     }
 }

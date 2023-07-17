@@ -54,8 +54,8 @@
                 background:#DCDCDC;
             }
             &.active {
-                background: $yellow;
-                color: white;
+                background: $darkGreen;
+                color: $yellow;
             }
         }
         &-img {

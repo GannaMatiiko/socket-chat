@@ -1,6 +1,6 @@
 <template>
     <v-app-bar
-      color="green"
+      color="yellow"
       prominent
     >
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -12,7 +12,8 @@
       <!-- show if we have selected group -->
       <UserListModal></UserListModal>
 
-      <v-btn variant="text" icon="mdi-account-multiple-plus"></v-btn>
+      <!-- <v-btn variant="text" icon="mdi-account-multiple-plus"></v-btn> -->
+      <CreateChatModal></CreateChatModal>
 
       <!-- <v-btn variant="text" icon="mdi-cog"></v-btn> -->
       <UserSettingsModal></UserSettingsModal>
@@ -31,12 +32,14 @@
     </v-navigation-drawer>
 </template>
 <script>
-import UserListModal from '@/components/user/UserListModal.vue';
-import UserSettingsModal from '@/components/user/UserSettingsModal.vue';
+import UserListModal from '@/components/modals/UserListModal.vue';
+import UserSettingsModal from '@/components/modals/UserSettingsModal.vue';
+import CreateChatModal from '@/components/modals/CreateChatModal.vue';
   export default {
     components: {
       UserListModal,
-      UserSettingsModal
+      UserSettingsModal,
+      CreateChatModal
     },
     data: () => ({
       drawer: false,
@@ -77,6 +80,9 @@ import UserSettingsModal from '@/components/user/UserSettingsModal.vue';
             }
             )
       }
+    },
+    mounted() {
+      this.$store.dispatch('loadAllUsers');
     }
   }
 </script>
