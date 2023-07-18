@@ -24,10 +24,10 @@
         },
         data() {
             return {
-                pageToFetch: 1,
+                pageToFetch: 0,
                 toFireScroll: true,
                 isMessageEnded: false,
-                messagesPerPage: 8
+                messagesPerPage: 20
             }
         },
         computed: {
@@ -40,7 +40,7 @@
         },
         watch: {
             roomChosen() {
-                this.pageToFetch = 1;
+                this.pageToFetch = 0;
                 this.isMessageEnded = false;
                 this.toFireScroll = true;
             }

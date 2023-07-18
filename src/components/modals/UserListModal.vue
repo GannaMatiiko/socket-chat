@@ -16,7 +16,17 @@
                       <v-list-item
                         v-for="user in roomUsers"
                         :key="user._id"
-                      >{{ user.login }}</v-list-item>
+                        class="chat-members-list__item"
+                        @click="initDialogue(user._id)"
+                      >
+                      <v-icon
+                        size="default"
+                        color="lime-darken-3"
+                        icon="mdi-message-text-outline"
+                        class="mr-1"
+                    ></v-icon>
+                      {{ user.login }}
+                    </v-list-item>
                     </v-list>
                 </v-card-text>
                 <v-card-actions>
@@ -34,6 +44,21 @@
         dialog: false,
       }
     },
+    methods: {
+      initDialogue(userId) {
+        this.axios.post('http://localhost:4000/room/create-dialogue', {
+          partnerId: userId,
+        },  {
+            headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
+        })
+        .then((res) => {
+          console.log('77777', res);
+          // TODO change display correct icon and chat name and open chat with this person
+          this.$store.dispatch('addNewChat', res.data);
+        })
+        .catch(e => console.error('Cannot create group chat', e))
+      }
+    },
     computed: {
       roomUsers() {
         return this.$store.getters.getChanelUsers;
@@ -44,3 +69,13 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .chat-members-list {
+    &__item {
+      cursor: pointer;
+      color: $darkGreen;
+      font-weight: 700;
+    }
+  }
+</style>

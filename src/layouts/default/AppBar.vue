@@ -5,9 +5,16 @@
     >
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>My chat app</v-toolbar-title>
+      <v-icon
+            size="default"
+            icon="mdi-account-circle"
+            class="mr-1"
+        ></v-icon>
+      {{ logLogin}}
 
       <v-spacer></v-spacer>
+
+      <v-toolbar-title>My chat app</v-toolbar-title>
 
       <!-- show if we have selected group -->
       <UserListModal></UserListModal>
@@ -83,6 +90,11 @@ import CreateChatModal from '@/components/modals/CreateChatModal.vue';
     },
     mounted() {
       this.$store.dispatch('loadAllUsers');
+    },
+    computed: {
+      logLogin() {
+        return localStorage.getItem('login');
+      }
     }
   }
 </script>
