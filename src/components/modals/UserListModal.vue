@@ -17,7 +17,7 @@
                         v-for="user in roomUsers"
                         :key="user._id"
                         class="chat-members-list__item"
-                        @click="initDialogue(user._id)"
+                        @click="initDialogue(user._id, user.login)"
                       >
                       <v-icon
                         size="default"
@@ -45,7 +45,8 @@
       }
     },
     methods: {
-      initDialogue(userId) {
+      initDialogue(userId, userLogin) {
+        console.log('USER LOFIN', userLogin);
         this.axios.post('http://localhost:4000/room/create-dialogue', {
           partnerId: userId,
         },  {
@@ -53,8 +54,16 @@
         })
         .then((res) => {
           console.log('77777', res);
+
+          let newPrivateChat = {
+                _id: res.data.chatRoom._id,
+                name: userLogin,
+                isDialogue: true
+          }
+          
           // TODO change display correct icon and chat name and open chat with this person
-          this.$store.dispatch('addNewChat', res.data);
+          this.$store.dispatch('addNewChat', newPrivateChat);
+          this.dialog = false;
         })
         .catch(e => console.error('Cannot create group chat', e))
       }

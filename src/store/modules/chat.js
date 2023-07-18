@@ -62,7 +62,7 @@ export default {
         },
         addNewChat({commit}, chatRoom) {
             commit('addNewChat', chatRoom);
-        }
+        },
     },
     mutations: {
         // setUser(state, id) {
@@ -87,11 +87,7 @@ export default {
             state.chanelUsers = users;
         },
         addNewChat(state, chatRoom) {
-            let newChat = {
-                _id: chatRoom._id,
-                name: chatRoom.name
-            }
-            state.chatRooms.push(newChat);
+            state.chatRooms.push(chatRoom);
         }
     }
 }

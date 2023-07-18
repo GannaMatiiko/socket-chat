@@ -25,6 +25,7 @@
                 this.$store.dispatch('storeActiveRoomId', roomId);
             },
             selectChatInfo(roomId) {
+                console.log('roomId!!!', roomId);
                 if (this.$store.getters.getActiveRoomId === roomId) {
                     return
                 }
