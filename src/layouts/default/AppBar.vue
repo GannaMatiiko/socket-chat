@@ -78,7 +78,7 @@ import CreateChatModal from '@/components/modals/CreateChatModal.vue';
     },
     methods: {
       logout() {
-        this.axios.post('http://localhost:4000/users/logout', {},  {
+        this.axios.post('/users/logout', {},  {
                 headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
             })
             .then(() => {

@@ -35,6 +35,7 @@
             </v-card>
         </v-dialog>
     </div>
+    <v-snackbar v-model="snackbar" :timeout="timeout" color="orange-darken-2">Cannot chat with myself...</v-snackbar>
 </template>
 
 <script>
@@ -42,12 +43,21 @@
     data () {
       return {
         dialog: false,
+        snackbar: false,
+        timeout: 2000,
       }
     },
     methods: {
       initDialogue(userId, userLogin) {
-        console.log('USER LOFIN', userLogin);
-        this.axios.post('http://localhost:4000/room/create-dialogue', {
+        console.log('USER LOFIN', userLogin, userId);
+
+        // don't create chat witn myself
+        if (userId === this.getCurrentUserId) {
+          this.snackbar = true;
+          return;
+        }
+
+        this.axios.post('/room/create-dialogue', {
           partnerId: userId,
         },  {
             headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
@@ -74,6 +84,10 @@
       },
       isRoomIdSelected() {
         return this.$store.getters.getActiveRoomId;
+      },
+      getCurrentUserId() {
+        console.log('computed', this.$store.getters.getUserId);
+        return this.$store.getters.getUserId;
       }
     }
   }

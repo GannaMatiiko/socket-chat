@@ -32,7 +32,7 @@
                 
                 this.selectCurrentRoomId(roomId);
 
-                this.axios.get(`http://localhost:4000/room/${roomId}`, {
+                this.axios.get(`/room/${roomId}`, {
                     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
                 })
                 .then(res => {
@@ -43,7 +43,7 @@
                 }
         },
         mounted() {
-            this.axios.get('http://localhost:4000/users/chat-rooms', {
+            this.axios.get('/users/chat-rooms', {
                 headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
             })
             .then(res => this.$store.dispatch('loadChatRooms', res.data))

@@ -38,7 +38,7 @@ export default {
             this.$refs.loginForm.validate()
                 .then(data => {
                     if (data.valid) {
-                        this.axios.post('http://localhost:4000/users/login', {
+                        this.axios.post('users/login', {
                             'email': this.email
                         }).then((response) => {
                             this.$store.dispatch('setUser', response.data);

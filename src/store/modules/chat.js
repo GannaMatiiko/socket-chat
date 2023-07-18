@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosConfig from '@/plugins/axiosConfig';
 
 export default {
     state() {
@@ -52,7 +52,7 @@ export default {
         },
         async loadAllUsers(context) {
             try {
-                const res = await axios.get(`http://localhost:4000/users`, {
+                const res = await axiosConfig.get(`/users`, {
                     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
                 })
                 await context.commit('loadRoomMembers', res.data.users);

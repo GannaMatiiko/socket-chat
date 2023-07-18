@@ -53,7 +53,7 @@
                     this.pageToFetch += 1;
 
                     if (!this.isMessageEnded) {
-                        this.axios.get(`http://localhost:4000/room/${this.roomChosen}/?page=${this.pageToFetch}`, {
+                        this.axios.get(`room/${this.roomChosen}/?page=${this.pageToFetch}`, {
                             headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
                         })
                         .then(res => {

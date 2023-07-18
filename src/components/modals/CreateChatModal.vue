@@ -64,7 +64,7 @@
       createGroupChat() {
         this.dialog = false;
         
-        this.axios.post('http://localhost:4000/room/create-group', {
+        this.axios.post('/room/create-group', {
           name: this.chatName,
           userIds: this.addedToChatUsers.map(user => user._id)
         },  {

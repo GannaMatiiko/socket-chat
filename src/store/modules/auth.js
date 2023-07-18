@@ -2,12 +2,16 @@ export default {
     state() {
         return {
             user: null,
-            token: null
+            token: null,
+            userId: null
         }
     },
     getters: {
         getUserName(state) {
             return state.user;
+        },
+        getUserId() {
+            return localStorage.getItem('userId');
         }
     },
     actions: {
@@ -20,10 +24,12 @@ export default {
     },
     mutations: {
         setUser(state, userData) {
+            console.log('userData', userData);
             state.user = userData.login;
             state.token = userData.token;
             localStorage.setItem('token', userData.token);
             localStorage.setItem('login', userData.login);
+            localStorage.setItem('userId', userData._id);
         },
         logoutUser(state) {
             state.user = null;
@@ -34,6 +40,7 @@ export default {
             this.state.chat.activeRoomId = [];
             localStorage.removeItem('token');
             localStorage.removeItem('login');
+            localStorage.removeItem('userId');
         }
     }
 }
