@@ -57,6 +57,7 @@
           return;
         }
 
+
         this.axios.post('/room/create-dialogue', {
           partnerId: userId,
         },  {
@@ -64,16 +65,20 @@
         })
         .then((res) => {
           console.log('77777', res);
-
-          let newPrivateChat = {
-                _id: res.data.chatRoom._id,
-                name: userLogin,
-                isDialogue: true
+          if (res.data.alreadyExists) {
+            console.log('already exists!');
+            this.dialog = false;
+            // TODO open dialog with this user
+          } else {
+            let newPrivateChat = {
+                  _id: res.data.chatRoom._id,
+                  name: userLogin,
+                  isDialogue: true
+            }
+            // TODO change display correct icon and chat name and open chat with this person
+            this.$store.dispatch('addNewChat', newPrivateChat);
+            this.dialog = false;
           }
-          
-          // TODO change display correct icon and chat name and open chat with this person
-          this.$store.dispatch('addNewChat', newPrivateChat);
-          this.dialog = false;
         })
         .catch(e => console.error('Cannot create group chat', e))
       }

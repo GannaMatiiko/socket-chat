@@ -57,7 +57,7 @@
     },
     computed: {
       allChatUsers() {
-        return this.$store.getters.getChanelUsers;
+        return this.$store.getters.getChanelUsers.filter(user => !user.isCurrentUser);
       }
     },
     methods: {

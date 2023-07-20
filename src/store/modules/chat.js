@@ -19,12 +19,15 @@ export default {
         },
         loadChatRooms(state) {
             return state.chatRooms;
-        },
+        }, 
         getActiveRoomId(state) {
             return state.activeRoomId;
         },
         getChanelUsers(state) {
             return state.chanelUsers;
+        },
+        getDialogueChatsIds(state) {
+            return state.chatRooms.filter(room => room.isDialogue).map(item => item._id);
         }
     },
     actions: {

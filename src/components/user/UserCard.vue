@@ -9,22 +9,37 @@
         <span v-else>
             <span class="user-img" :style="getRandomColor">{{ createInitials(user.name) }}</span>
         </span> -->
-
         <v-icon
-            v-if="user.isDialogue"
+            v-if="user.isService"
+            size="default"
+            color="orange-darken-1"
+            icon="mdi-music-accidental-sharp"
+            class="mr-1"
+        ></v-icon>
+        <v-icon
+            v-else-if="user.isDialogue"
             size="default"
             color="lime-darken-3"
             icon="mdi-account-multiple"
             class="mr-1"
         ></v-icon>
         <v-icon
-            v-else
+            v-else-if="!user.isDialogue"
             size="default"
-            color="orange-darken-1"
+            color="green-darken-3"
             icon="mdi-bullhorn"
             class="mr-1"
         ></v-icon>
         <div class="user-name">{{ user.name }}</div>
+        <v-chip
+            class=""
+            color="pink"
+            label
+            text-color="white"
+            >
+            <v-icon start icon="mdi-label"></v-icon>
+            Tags
+        </v-chip>
     </div>
 </template>
 

@@ -55,6 +55,18 @@
 <style lang="scss">
     .sidebar {
         width: 20vw;
+        max-height: 93.5vh;
+        height: 93.5vh;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+        &::-webkit-scrollbar-track {
+            background: #cfcfcf;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: $green;
+        }
     }
 </style>
 
