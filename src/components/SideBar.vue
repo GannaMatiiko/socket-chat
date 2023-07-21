@@ -21,26 +21,29 @@
             }
         },
         methods: {
-            selectCurrentRoomId(roomId) {
-                this.$store.dispatch('storeActiveRoomId', roomId);
-            },
             selectChatInfo(roomId) {
-                console.log('roomId!!!', roomId);
-                if (this.$store.getters.getActiveRoomId === roomId) {
-                    return
-                }
+                this.$store.dispatch('selectChatInfo', roomId);
+            }
+            // selectCurrentRoomId(roomId) {
+            //     this.$store.dispatch('storeActiveRoomId', roomId);
+            // },
+            // selectChatInfo(roomId) {
+            //     console.log('roomId!!!', roomId);
+            //     if (this.$store.getters.getActiveRoomId === roomId) {
+            //         return
+            //     }
                 
-                this.selectCurrentRoomId(roomId);
+            //     this.selectCurrentRoomId(roomId);
 
-                this.axios.get(`/room/${roomId}`, {
-                    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
-                })
-                .then(res => {
-                    this.$store.dispatch('loadRoomMessages', res.data.conversation);
-                    this.$store.dispatch('loadRoomMembers', res.data.users);
-                })
-                .catch(error => console.error(error))
-                }
+            //     this.axios.get(`/room/${roomId}`, {
+            //         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
+            //     })
+            //     .then(res => {
+            //         this.$store.dispatch('loadRoomMessages', res.data.conversation);
+            //         this.$store.dispatch('loadRoomMembers', res.data.users);
+            //     })
+            //     .catch(error => console.error(error))
+            // }
         },
         mounted() {
             this.axios.get('/users/chat-rooms', {

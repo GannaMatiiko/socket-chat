@@ -66,6 +66,23 @@ export default {
         addNewChat({commit}, chatRoom) {
             commit('addNewChat', chatRoom);
         },
+        async selectChatInfo(context, roomId) {
+            if (context.getters.getActiveRoomId === roomId) {
+                return
+            }
+            
+            context.dispatch('storeActiveRoomId', roomId);
+
+            try {
+                const res = await axiosConfig.get(`/room/${roomId}`, {
+                    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
+                })
+                await context.dispatch('loadRoomMessages', res.data.conversation);
+                await context.dispatch('loadRoomMembers', res.data.users);
+            } catch (error) {
+                console.error(error);
+            }
+        }
     },
     mutations: {
         // setUser(state, id) {

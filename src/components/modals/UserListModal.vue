@@ -64,20 +64,20 @@
             headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
         })
         .then((res) => {
-          console.log('77777', res);
           if (res.data.alreadyExists) {
-            console.log('already exists!');
             this.dialog = false;
-            // TODO open dialog with this user
+            //open dialog with this user
+            this.$store.dispatch('selectChatInfo', res.data.roomId)
           } else {
             let newPrivateChat = {
                   _id: res.data.chatRoom._id,
                   name: userLogin,
                   isDialogue: true
             }
-            // TODO change display correct icon and chat name and open chat with this person
             this.$store.dispatch('addNewChat', newPrivateChat);
             this.dialog = false;
+            // open dialog with this user
+            this.$store.dispatch('selectChatInfo', newPrivateChat._id);
           }
         })
         .catch(e => console.error('Cannot create group chat', e))
