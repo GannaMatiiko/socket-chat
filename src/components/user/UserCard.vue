@@ -31,20 +31,23 @@
             class="mr-1"
         ></v-icon>
         <div class="user-name">{{ user.name }}</div>
-        <v-chip
-            class=""
-            color="pink"
-            label
-            text-color="white"
-            >
-            <v-icon start icon="mdi-label"></v-icon>
-            Tags
-        </v-chip>
+
+        <v-spacer></v-spacer>
+
+        <AddGroupMemebersModal 
+            v-if="!user.isDialogue && !user.isService" 
+            :roomId="user._id" 
+            :roomName="user.name"
+        ></AddGroupMemebersModal>
     </div>
 </template>
 
 <script>
+    import AddGroupMemebersModal from '@/components/modals/AddGroupMemebersModal.vue';
     export default {
+        components: {
+            AddGroupMemebersModal
+        },
         props: {
             user: {
                 type: Object,
@@ -57,6 +60,9 @@
             // selectUser(id) {
             //     this.$store.dispatch('setUser', id)
             // }
+            addGroupMembers() {
+                console.log('yezhik');
+            }
         },
         computed: {
             // getRandomColor() {
@@ -71,7 +77,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .user {
         &-card {
             display: flex;
@@ -85,6 +91,11 @@
             &.active {
                 background: $darkGreen;
                 color: $yellow;
+                .text-left {
+                    .user-label_add-person {
+                        background: #B2DFDB;
+                    }
+                }
             }
         }
         &-img {
