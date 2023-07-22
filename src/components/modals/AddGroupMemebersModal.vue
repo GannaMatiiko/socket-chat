@@ -12,27 +12,29 @@
                     text-color="white"
                     prepend-icon="mdi-account-plus"
                     v-bind="props"
-                    @click="clickedChip"
+                    @click="loadUnaddedToChatUsers"
                     >
                 </v-chip>
-
             </template>
 
-            <v-card :title='addToChatUsersTitle'>
-              <v-form >
+            <v-card :title="titleAddToChatUsers">
+              <v-form @submit.prevent="addGroupMember">
                 <v-card-text>
                     <v-select
+                        v-if="exceptUsersInRoom.length"
                         v-model="addedToChatUsers"
-                        :items="[]"
+                        :items="exceptUsersInRoom"
                         item-title="login"
                         item-value="_id"
                         label="Add members"
                         return-object
                         multiple
                     ></v-select>
-                    
+                    <div v-else class="text-center">
+                        All available users added
+                    </div>
                 </v-card-text>
-                <v-card-actions>
+                <v-card-actions v-if="exceptUsersInRoom.length !== 0">
                     <v-btn color="light-green-darken-4" block type="submit">Save</v-btn>
                 </v-card-actions>
               </v-form>  
@@ -51,21 +53,38 @@
       return {
         dialog: false,
         addedToChatUsers: [],
+        exceptUsersInRoom: []
       }
     },
     computed: {
-        addToChatUsersTitle() {
+        titleAddToChatUsers() {
             return `Whom do you want to add to ${this.roomName}?`
-        }
+        },
     },
     methods: {
-        clickedChip() {
-            console.log('clicked Chip');
-            this.axios.get('/users?exceptUsersInRoomId=true', {
+        loadUnaddedToChatUsers() {
+            this.axios.get(`/users?exceptUsersInRoomId=${this.roomId}`, {
                 headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
             })
-            .then(res => console.log('resexceptUsersInRoomId', res))
-            .catch(error => console.error('errorexceptUsersInRoomId', error))
+            .then(res => {
+                this.exceptUsersInRoom = res.data.users
+            })
+            .catch(error => console.error(error))
+        },
+        addGroupMember() {
+            this.axios.put('/room/add-group-members', {
+                chatId: this.roomId,
+                userIds: this.addedToChatUsers.map(user => user._id)
+            }, {
+                headers: { Authorization: 'Bearer ' + localStorage.getItem('token')} 
+            })
+            .then(res => {
+                this.$store.dispatch('loadRoomMembers', res.data.users);
+                this.dialog = false;
+                this.addedToChatUsers = [];
+                this.exceptUsersInRoom = [];
+            }) 
+            .catch(error => console.error(error))
         }
     }
   }
