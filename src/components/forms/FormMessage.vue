@@ -1,6 +1,14 @@
 <template>
-    <v-form @submit.prevent="sendMessageText" class="send-form">
-        <v-textarea @keydown.enter.prevent="sendMessageText" v-model="messageText" label="Write a message" variant="outlined" no-resize :messages="showChatCommands"></v-textarea>
+    <v-form @submit.prevent="sendMessageText" class="send-form" ref="sendMessageForm">
+        <v-textarea 
+            @keydown.enter.prevent="sendMessageText" 
+            v-model="messageText" 
+            label="Write a message" 
+            variant="outlined"
+            :rules="rulesMessageText"
+            no-resize
+            :messages="showChatCommands"
+        ></v-textarea>
         <v-btn type="submit" class="send-form__btn mt-2">Send</v-btn>
     </v-form>
 </template>
@@ -12,6 +20,10 @@ import socket from '@/plugins/socket.js'
     export default {
         data() {
             return {
+                valid: true,
+                rulesMessageText: [
+                    value => !!value || 'Required.',
+                ],
                 messageText: '',
                 chatType: 'room',
                 isServiceMessage: false,
@@ -24,14 +36,7 @@ import socket from '@/plugins/socket.js'
         },
         created() {
             console.log('IN CREATED');
-            // const token = localStorage.getItem("token");
-            // if (token) {
-            // socket.auth = { token };
-            // socket.connect();
-            // socket.emit('sendMessage', new Date().getMilliseconds());
-            // }
             socket.connect();
-          //  socket.emit('sendMessage', 'valer' + new Date().getMilliseconds());
             console.log('socket', socket);
 
             socket.on("connect_error", (err) => {
@@ -75,6 +80,9 @@ import socket from '@/plugins/socket.js'
                 this.$nextTick(() => bottomRef.scrollIntoView({block: "end", behavior: "smooth"}))
             },
             sendMessageText() {
+                if (!this.messageText) {
+                    return;
+                }
                 this.checkSpecialChatCommands(this.messageText);
                 this.$store.dispatch('appendMessage', {
                     login: localStorage.getItem('login'),
@@ -88,6 +96,7 @@ import socket from '@/plugins/socket.js'
                 socket.emit('sendMessage', this.messageText, this.chatRoomId, this.isServiceMessage);
                 this.scrollToChatboxEnd();  
                 this.messageText = '';
+                this.$refs.sendMessageForm.reset();
             }
         }
     }
