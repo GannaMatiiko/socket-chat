@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar">
-        <UserCard v-for="user in users" :user="user" :key="user._id" @click="selectChatInfo(user._id)"></UserCard>
+        <UserCard v-for="user in users" :user="user" :key="user._id" @click="selectChatInfo(user._id, user.isDialogue)"></UserCard>
     </div>
     </template>
 
@@ -21,8 +21,12 @@
             }
         },
         methods: {
-            selectChatInfo(roomId) {
-                this.$store.dispatch('selectChatInfo', roomId);
+            selectChatInfo(roomId, isDialogue) {
+                const roomObj = {
+                    roomId,
+                    isDialogue
+                }
+                this.$store.dispatch('selectChatInfo', roomObj);
             }
         },
         mounted() {

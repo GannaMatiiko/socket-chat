@@ -10,6 +10,7 @@
             icon="mdi-account-circle"
             class="mr-1"
         ></v-icon>
+        
       {{ logLogin}}
 
       <v-spacer></v-spacer>
@@ -17,12 +18,10 @@
       <v-toolbar-title>My chat app</v-toolbar-title>
 
       <!-- show if we have selected group -->
-      <UserListModal></UserListModal>
+      <UserListModal v-if="getActiveRoomType === 'chanel'"></UserListModal>
 
-      <!-- <v-btn variant="text" icon="mdi-account-multiple-plus"></v-btn> -->
       <CreateChatModal></CreateChatModal>
 
-      <!-- <v-btn variant="text" icon="mdi-cog"></v-btn> -->
       <UserSettingsModal></UserSettingsModal>
 
       <v-btn @click="logout" variant="text" icon="mdi-logout"></v-btn>
@@ -94,6 +93,9 @@ import CreateChatModal from '@/components/modals/CreateChatModal.vue';
     computed: {
       logLogin() {
         return localStorage.getItem('login');
+      },
+      getActiveRoomType() {
+        return this.$store.getters.getActiveRoomType;
       }
     }
   }

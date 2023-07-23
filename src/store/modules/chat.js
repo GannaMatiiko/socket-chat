@@ -8,6 +8,7 @@ export default {
             chatRooms: [],
             chanelUsers: [],
             activeRoomId: null,
+            activeRoomType: String
         }
     },
     getters: {
@@ -22,6 +23,9 @@ export default {
         }, 
         getActiveRoomId(state) {
             return state.activeRoomId;
+        },
+        getActiveRoomType(state) {
+            return state.activeRoomType;
         },
         getChanelUsers(state) {
             return state.chanelUsers;
@@ -43,6 +47,9 @@ export default {
         },
         storeActiveRoomId({commit}, roomId) {
             commit('storeActiveRoomId', roomId);
+        },
+        storeActiveRoomType({commit}, isDialogue) {
+            commit('storeActiveRoomType', isDialogue);
         },
         loadRoomMessages({commit}, messages) {
             commit('loadRoomMessages', messages);
@@ -66,22 +73,23 @@ export default {
         addNewChat({commit}, chatRoom) {
             commit('addNewChat', chatRoom);
         },
-        async selectChatInfo(context, roomId) {
-            if (context.getters.getActiveRoomId === roomId) {
+        async selectChatInfo(context, roomObj) {
+            if (context.getters.getActiveRoomId === roomObj.roomId) {
                 return
             }
             
-            context.dispatch('storeActiveRoomId', roomId);
+            context.dispatch('storeActiveRoomId', roomObj.roomId);
+            context.dispatch('storeActiveRoomType', roomObj.isDialogue);
 
             try {
-                const res = await axiosConfig.get(`/room/${roomId}`, {
+                const res = await axiosConfig.get(`/room/${roomObj.roomId}`, {
                     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
                 })
                 await context.dispatch('loadRoomMessages', res.data.conversation);
                 await context.dispatch('loadRoomMembers', res.data.users);
                 // for removing icon with new message
                 context.state.chatRooms = context.state.chatRooms.map(room =>
-                    room._id === roomId ? { ...room, hasNewMsg: false } : room
+                    room._id === roomObj.roomId ? { ...room, hasNewMsg: false } : room
                 );
             } catch (error) {
                 console.error(error);
@@ -100,6 +108,9 @@ export default {
         },
         loadChatRooms(state, rooms) {
             state.chatRooms = rooms;
+        },
+        storeActiveRoomType(state, isDialogue) {
+            state.activeRoomType = isDialogue ? 'dialogue' : 'chanel';
         },
         storeActiveRoomId(state, roomId) {
             state.activeRoomId = roomId;

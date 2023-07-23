@@ -30,7 +30,7 @@ import socket from '@/plugins/socket.js'
                 chatCommands: [
                     '/date',
                     '/me some string',
-                    '/show members'
+                    '/show-members'
                 ],
             }
         },
@@ -50,7 +50,7 @@ import socket from '@/plugins/socket.js'
         },
         computed: {
             showChatCommands() {
-                return this.chatType === 'room' ? this.chatCommands : this.chatCommands.slice(0, 2)
+                return this.$store.getters.getActiveRoomType === 'dialogue' ? this.chatCommands.slice(0, 2) : this.chatCommands;
             },
             chatRoomId() {
                 return this.$store.getters.getActiveRoomId;
@@ -65,13 +65,11 @@ import socket from '@/plugins/socket.js'
                     this.messageText = format(new Date(), 'PP ');
                 }
                 if (value.substring(0, 4) === '/me ') {
-                    console.log('ME!!!');
                     const userName = localStorage.getItem('login');
                     this.messageText = `${userName.toUpperCase()} ${value.slice(4)}`
                     this.isServiceMessage = true;
                 }
-                if (value === '/show members') {
-                    console.log('SHHOW MEMBERES!');
+                if (value === '/show-members') {
                     this.messageText = `Chat members: ${this.roomUsers.map(user => user.login).join(', ')}`;
                 }
             },
