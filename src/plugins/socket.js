@@ -1,7 +1,8 @@
 import { io } from "socket.io-client";
 import store from '@/store/index.js';
 
-const URL = "http://localhost:4000";
+// const URL = "http://localhost:4000";
+const URL = "https://chat-backend-ovl8.onrender.com";
 const socket = io(URL, {
     // autoConnect: false,
 transportOptions: {
