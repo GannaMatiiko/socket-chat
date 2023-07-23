@@ -22,7 +22,6 @@
         },
         methods: {
             selectChatInfo(roomId) {
-                console.log('apapappa');
                 this.$store.dispatch('selectChatInfo', roomId);
             }
         },

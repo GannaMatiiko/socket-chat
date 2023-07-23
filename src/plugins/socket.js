@@ -18,16 +18,16 @@ socket.on("messagePublished", (msg) => {
   console.log('on message %%', msg);
   if (msg.chatRoomId === store.getters.getActiveRoomId) {
         store.dispatch('appendMessage', {
-        login: msg.login,
-        text: msg.message,
-        createdAt: msg.createdAt,
-        isAuthorOwner: msg.isAuthorOwner,
-        isServiceMessage: msg.isServiceMessage,
-    })
+          login: msg.login,
+          text: msg.message,
+          createdAt: msg.createdAt,
+          isAuthorOwner: msg.isAuthorOwner,
+          isServiceMessage: msg.isServiceMessage,
+      }
+    )
   } else {
-    console.log('ELSE', 'todo show label NEW in non selected chat room id');
+    store.dispatch('notifyAboutNewMessageInRoom', msg.chatRoomId);
   }
-
 });
 
 socket.onAny((event, ...args) => {

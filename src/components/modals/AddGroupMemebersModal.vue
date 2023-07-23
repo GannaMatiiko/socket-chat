@@ -18,7 +18,7 @@
             </template>
 
             <v-card :title="titleAddToChatUsers">
-              <v-form @submit.prevent="addGroupMember">
+              <v-form @submit.prevent="addGroupMember" v-model="valid">
                 <v-card-text>
                     <v-select
                         v-if="exceptUsersInRoom.length"
@@ -27,6 +27,7 @@
                         item-title="login"
                         item-value="_id"
                         label="Add members"
+                        :rules="rulesMembersSelect"
                         return-object
                         multiple
                     ></v-select>
@@ -35,7 +36,7 @@
                     </div>
                 </v-card-text>
                 <v-card-actions v-if="exceptUsersInRoom.length !== 0">
-                    <v-btn color="light-green-darken-4" block type="submit">Save</v-btn>
+                    <v-btn color="light-green-darken-4" block type="submit" :disabled="!valid">Save</v-btn>
                 </v-card-actions>
               </v-form>  
             </v-card>
@@ -51,6 +52,8 @@
     },
     data () {
       return {
+        valid: false,
+        rulesMembersSelect: [value => Boolean(Object.keys(value || {})[0]) || "Field is required"],
         dialog: false,
         addedToChatUsers: [],
         exceptUsersInRoom: []

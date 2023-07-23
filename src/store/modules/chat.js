@@ -79,9 +79,16 @@ export default {
                 })
                 await context.dispatch('loadRoomMessages', res.data.conversation);
                 await context.dispatch('loadRoomMembers', res.data.users);
+                // for removing icon with new message
+                context.state.chatRooms = context.state.chatRooms.map(room =>
+                    room._id === roomId ? { ...room, hasNewMsg: false } : room
+                );
             } catch (error) {
                 console.error(error);
             }
+        },
+        notifyAboutNewMessageInRoom({commit}, chatRoomId) {
+            commit('notifyAboutNewMessageInRoom', chatRoomId)
         }
     },
     mutations: {
@@ -108,6 +115,11 @@ export default {
         },
         addNewChat(state, chatRoom) {
             state.chatRooms.push(chatRoom);
+        },
+        notifyAboutNewMessageInRoom(state, chatRoomId) {
+            state.chatRooms = state.chatRooms.map(room =>
+                room._id === chatRoomId ? { ...room, hasNewMsg: true } : room
+            );
         }
     }
 }

@@ -1,14 +1,5 @@
 <template>
-    <!-- <div @click="selectUser(user._id)" class="user-card" :class="{active: isCurrUserActive}"> -->
-    
-        <!-- TEMPORARY -->
     <div class="user-card" :class="{active: isCurrUserActive}">
-        <!-- <span v-if="user.isGeneral">
-            <img class="user-img" src="@/assets/general.png">
-        </span>
-        <span v-else>
-            <span class="user-img" :style="getRandomColor">{{ createInitials(user.name) }}</span>
-        </span> -->
         <v-icon
             v-if="user.isService"
             size="default"
@@ -33,6 +24,12 @@
         <div class="user-name">{{ user.name }}</div>
 
         <v-spacer></v-spacer>
+        <v-icon
+            v-if="user.hasNewMsg"
+            color="pink-darken-1"
+            icon="mdi-message-badge"
+            class="mr-1"
+        ></v-icon>
 
         <AddGroupMemebersModal 
             v-if="!user.isDialogue && !user.isService" 
@@ -54,22 +51,11 @@
             }
         },
         methods: {
-            // createInitials(name) {
-            //     return name.slice(0, 2).toUpperCase()
-            // },
-            // selectUser(id) {
-            //     this.$store.dispatch('setUser', id)
-            // }
             addGroupMembers() {
                 console.log('yezhik');
             }
         },
         computed: {
-            // getRandomColor() {
-            //     return {
-            //         backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`
-            //     }
-            // },
             isCurrUserActive() {
                 return this.$store.getters.getActiveRoomId === this.user._id
             }
