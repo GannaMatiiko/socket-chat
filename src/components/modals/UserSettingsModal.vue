@@ -11,24 +11,24 @@
             <v-card title="Manage your chat history">
                 <v-card-text>
                     <div class="d-flex mt-5">
-                        <v-radio-group label="How long" v-model="daysToStore">
-                            <v-radio label="1 day" value="1"></v-radio>
-                            <v-radio label="7 days" value="7"></v-radio>
-                            <v-radio label="30 days" value="30"></v-radio>
-                        </v-radio-group>
-                        <v-radio-group label="How much" v-model="messagesToStore">
-                            <v-radio label="500 messages" value="500"></v-radio>
-                            <v-radio label="1000 messages" value="1000"></v-radio>
-                            <v-radio label="5000 messages" value="5000"></v-radio>
+                        <v-radio-group label="How long or how much" v-model="chatHistoryOption">
+                            <v-radio 
+                              v-for="setting in userSettingsData" 
+                              :key="setting._id" 
+                              :label="setting.name" 
+                              :value="setting._id"
+                            ></v-radio>
                         </v-radio-group>
                     </div>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn color="light-green-darken-4" block @click="dialog = false">Save</v-btn>
+                    <v-btn color="light-green-darken-4" block @click="storeChatSettings">Save</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
     </div>
+    <v-snackbar v-model="settingSaved" :timeout="timeout" color="light-green-darken-1">Saved</v-snackbar>
+    <v-snackbar v-model="settingFailed" :timeout="timeout" color="orange-darken-2">Cannot save setting...</v-snackbar>
 </template>
 
 <script>
@@ -36,14 +36,39 @@
     data () {
       return {
         dialog: false,
-        daysToStore: '1',
-        messagesToStore: '500'
+        settingSaved: false,
+        settingFailed: false,
+        timeout: 1500,
+        chatHistoryOption: +localStorage.getItem('chatHistoryMode'),
+        userSettingsData: []
       }
     },
     computed: {
       roomUsers() {
         return this.$store.getters.getChanelUsers;
       }
+    },
+    methods: {
+      storeChatSettings() {
+        localStorage.setItem('chatHistoryMode', this.chatHistoryOption);
+        this.dialog = false;
+        this.axios.put('/users/chat-history-mode', {
+          "chatHistoryMode": this.chatHistoryOption
+        }, {
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('token')} 
+        })
+        .then(() => this.settingSaved = true)
+        .catch(() => this.settingFailed = true)
+      }
+    },
+    mounted() {
+      this.axios.get('/users/chat-history-options', {
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('token')} 
+      })
+      .then(res => {
+        this.userSettingsData = res.data;
+      })
+      .catch(e => console.error(e))
     }
   }
 </script>
