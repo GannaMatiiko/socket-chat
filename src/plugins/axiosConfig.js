@@ -4,6 +4,7 @@ import router from '@/router/index';
 
 const instance = axios.create({
     baseURL: 'http://localhost:4000'
+    // baseURL: 'https://chat-backend-ovl8.onrender.com'
 })
 
 instance.interceptors.response.use(response => {

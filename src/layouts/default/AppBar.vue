@@ -3,14 +3,12 @@
       color="yellow"
       prominent
     >
-      <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
       <v-icon
             size="default"
             icon="mdi-account-circle"
-            class="mr-1"
+            class="mr-1 ml-4"
         ></v-icon>
-        
+
       {{ logLogin}}
 
       <v-spacer></v-spacer>
@@ -26,16 +24,6 @@
 
       <v-btn @click="logout" variant="text" icon="mdi-logout"></v-btn>
     </v-app-bar>
-
-    <v-navigation-drawer
-      v-model="drawer"
-      location="left"
-      temporary
-    >
-      <v-list
-        :items="items"
-      ></v-list>
-    </v-navigation-drawer>
 </template>
 <script>
 import UserListModal from '@/components/modals/UserListModal.vue';
@@ -48,33 +36,8 @@ import CreateChatModal from '@/components/modals/CreateChatModal.vue';
       CreateChatModal
     },
     data: () => ({
-      drawer: false,
-      group: null,
-      items: [
-        {
-          title: 'Foo',
-          value: 'foo',
-        },
-        {
-          title: 'Bar',
-          value: 'bar',
-        },
-        {
-          title: 'Fizz',
-          value: 'fizz',
-        },
-        {
-          title: 'Buzz',
-          value: 'buzz',
-        },
-      ],
-    }),
 
-    watch: {
-      group () {
-        this.drawer = false
-      },
-    },
+    }),
     methods: {
       logout() {
         this.axios.post('/users/logout', {},  {
@@ -83,8 +46,8 @@ import CreateChatModal from '@/components/modals/CreateChatModal.vue';
             .then(() => {
               this.$router.replace('/login');
               this.$store.dispatch('logoutUser')
-            }
-            )
+            })
+            .catch(e => console.error('Cannot logout', e))
       }
     },
     mounted() {

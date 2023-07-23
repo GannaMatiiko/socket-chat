@@ -5,27 +5,25 @@
             v-model="messageText" 
             label="Write a message" 
             variant="outlined"
-            :rules="rulesMessageText"
             no-resize
             :messages="showChatCommands"
         ></v-textarea>
         <v-btn type="submit" class="send-form__btn mt-2">Send</v-btn>
     </v-form>
+    <v-snackbar v-model="emptyMsg" close-delay="text-center" :timeout="timeout" color="deep-orange-darken-2">
+        Empty message!
+    </v-snackbar>
 </template>
 
 <script>
-// import dateFns from 'date-fns';
 import { format } from 'date-fns'
 import socket from '@/plugins/socket.js'
     export default {
         data() {
             return {
-                valid: true,
-                rulesMessageText: [
-                    value => !!value || 'Required.',
-                ],
+                emptyMsg: false,
+                timeout: 2000,
                 messageText: '',
-                chatType: 'room',
                 isServiceMessage: false,
                 chatCommands: [
                     '/date',
@@ -62,7 +60,7 @@ import socket from '@/plugins/socket.js'
         methods: {            
             checkSpecialChatCommands(value) {
                 if (value === '/date') {
-                    this.messageText = format(new Date(), 'PP ');
+                    this.messageText = format(new Date(), 'dd MMMM yyyy');
                 }
                 if (value.substring(0, 4) === '/me ') {
                     const userName = localStorage.getItem('login');
@@ -78,14 +76,15 @@ import socket from '@/plugins/socket.js'
                 this.$nextTick(() => bottomRef.scrollIntoView({block: "end", behavior: "smooth"}))
             },
             sendMessageText() {
-                if (!this.messageText) {
+                if (this.messageText.length === 0) {
+                    this.emptyMsg = true;
                     return;
                 }
                 this.checkSpecialChatCommands(this.messageText);
                 this.$store.dispatch('appendMessage', {
                     login: localStorage.getItem('login'),
                     text: this.messageText,
-                    createdAt: format(new Date(), 'yyyy-MM-DDD HH:mm:ss'),
+                    createdAt: format(new Date(), 'dd.MM.yyyy HH:mm:ss'),
                     isAuthorOwner: true,
                     isServiceMessage: this.isServiceMessage,
                 });
@@ -94,7 +93,6 @@ import socket from '@/plugins/socket.js'
                 socket.emit('sendMessage', this.messageText, this.chatRoomId, this.isServiceMessage);
                 this.scrollToChatboxEnd();  
                 this.messageText = '';
-                this.$refs.sendMessageForm.reset();
             }
         }
     }
