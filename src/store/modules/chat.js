@@ -77,7 +77,7 @@ export default {
             if (context.getters.getActiveRoomId === roomObj.roomId) {
                 return
             }
-            
+            console.log('roomObj', roomObj);
             context.dispatch('storeActiveRoomId', roomObj.roomId);
             context.dispatch('storeActiveRoomType', roomObj.isDialogue);
 

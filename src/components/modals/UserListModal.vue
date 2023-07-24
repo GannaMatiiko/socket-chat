@@ -67,7 +67,7 @@
           if (res.data.alreadyExists) {
             this.dialog = false;
             //open dialog with this user
-            this.$store.dispatch('selectChatInfo', res.data.roomId)
+            this.$store.dispatch('selectChatInfo', {roomId: res.data.roomId, isDialogue: true})
           } else {
             let newPrivateChat = {
                   _id: res.data.chatRoom._id,
@@ -77,7 +77,7 @@
             this.$store.dispatch('addNewChat', newPrivateChat);
             this.dialog = false;
             // open dialog with this user
-            this.$store.dispatch('selectChatInfo', newPrivateChat._id);
+            this.$store.dispatch('selectChatInfo', {roomId: newPrivateChat._id, isDialogue: true});
           }
         })
         .catch(e => console.error('Cannot create group chat', e))
