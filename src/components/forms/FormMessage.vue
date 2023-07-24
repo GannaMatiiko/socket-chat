@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { format } from 'date-fns'
+import moment from 'moment'
 import socket from '@/plugins/socket.js'
     export default {
         data() {
@@ -60,7 +60,7 @@ import socket from '@/plugins/socket.js'
         methods: {            
             checkSpecialChatCommands(value) {
                 if (value === '/date') {
-                    this.messageText = format(new Date(), 'dd MMMM yyyy');
+                    this.messageText = moment().format('DD MMMM YYYY')
                 }
                 if (value.substring(0, 4) === '/me ') {
                     const userName = localStorage.getItem('login');
@@ -84,7 +84,7 @@ import socket from '@/plugins/socket.js'
                 this.$store.dispatch('appendMessage', {
                     login: localStorage.getItem('login'),
                     text: this.messageText,
-                    createdAt: format(new Date(), 'dd.MM.yyyy HH:mm:ss'),
+                    createdAt: moment(new Date()).calendar(),
                     isAuthorOwner: true,
                     isServiceMessage: this.isServiceMessage,
                 });
