@@ -50,10 +50,6 @@ export default {
                         }).then((response) => {
                             this.$store.dispatch('setUser', response.data);
                             this.$router.replace('/');
-                            console.log('response data', response.data);
-                            // socket.auth = { token: response.data.token };
-                            // socket.connect();
-                            // console.log('socket connect', socket.connect);
                         })
                         .catch((error) => {
                             this.snackbar = true;

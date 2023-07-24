@@ -24,7 +24,6 @@ export default {
     },
     mutations: {
         setUser(state, userData) {
-            console.log('userData', userData);
             state.user = userData.login;
             state.token = userData.token;
             state.chatHistoryMode = userData.chatHistoryMode;

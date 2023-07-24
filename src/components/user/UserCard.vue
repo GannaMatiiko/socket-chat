@@ -50,11 +50,6 @@
                 type: Object,
             }
         },
-        methods: {
-            addGroupMembers() {
-                console.log('yezhik');
-            }
-        },
         computed: {
             isCurrUserActive() {
                 return this.$store.getters.getActiveRoomId === this.user._id

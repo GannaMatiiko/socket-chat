@@ -2,7 +2,6 @@ import { io } from "socket.io-client";
 import store from '@/store/index.js';
 
 const URL = import.meta.env.VITE_BACKEND_HOST;
-// const URL = "https://chat-backend-ovl8.onrender.com";
 const socket = io(URL, {
 transportOptions: {
 polling: {
@@ -15,7 +14,6 @@ polling: {
 
 // Update view on recieving message by socket
 socket.on("messagePublished", (msg) => {
-  console.log('on message %%', msg);
   if (msg.chatRoomId === store.getters.getActiveRoomId) {
         store.dispatch('appendMessage', {
           login: msg.login,

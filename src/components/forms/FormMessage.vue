@@ -89,7 +89,6 @@ import socket from '@/plugins/socket.js'
                     isServiceMessage: this.isServiceMessage,
                 });
                
-                console.log('before socket Send Message'); 
                 socket.emit('sendMessage', this.messageText, this.chatRoomId, this.isServiceMessage);
                 this.scrollToChatboxEnd();  
                 this.messageText = '';

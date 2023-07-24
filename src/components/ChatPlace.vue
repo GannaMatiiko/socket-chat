@@ -80,7 +80,6 @@
                             headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
                         })
                         .then(res => {
-                            console.log('res where is conversation?', res.data);
                             // to avoid unnecessary request to server
                             if (res.data.conversation.length < this.messagesPerPage) {
                                 this.isMessageEnded = true

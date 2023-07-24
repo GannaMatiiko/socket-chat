@@ -49,14 +49,11 @@
     },
     methods: {
       initDialogue(userId, userLogin) {
-        console.log('USER LOFIN', userLogin, userId);
-
         // don't create chat witn myself
         if (userId === this.getCurrentUserId) {
           this.snackbar = true;
           return;
         }
-
 
         this.axios.post('/room/create-dialogue', {
           partnerId: userId,
@@ -91,7 +88,6 @@
         return this.$store.getters.getActiveRoomId;
       },
       getCurrentUserId() {
-        console.log('computed', this.$store.getters.getUserId);
         return this.$store.getters.getUserId;
       }
     }
