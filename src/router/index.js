@@ -1,7 +1,6 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
 import Default from '@/layouts/default/Default.vue';
-import Home from '@/views/Home.vue';
 
 const routes = [
   {
@@ -11,7 +10,7 @@ const routes = [
       {
         path: '',
         name: 'Home',
-        component: Home,
+        component: () => import('@/views/Home.vue'),
       },
     ],
   },

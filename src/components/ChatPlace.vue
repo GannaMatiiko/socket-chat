@@ -2,7 +2,6 @@
     <div class="chatplace">
         <div v-if="!roomChosen" class="chatplace-text">Choose chat to begin</div>
         <div v-else >
-            <!-- <BaseSpinner v-if="!isLoaded"></BaseSpinner> -->
             <div class="chatplace-messages" ref="chatplaceMessages" @scroll="fetchChatHistory">
                 <UserChat v-for="msg in chatMessages" :msg="msg" :key="msg._id"></UserChat>
                 <!-- bottom place where scroll to -->
@@ -18,12 +17,10 @@
 <script>
     import UserChat from './user/UserChat.vue'
     import FormMessage from './forms/FormMessage.vue'
-    // import BaseSpinner from './ui/BaseSpinner.vue'
     export default {
         components: {
             UserChat,
             FormMessage,
-            // BaseSpinner
         },
         data() {
             return {
@@ -61,6 +58,7 @@
                             headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
                         })
                         .then(res => {
+                            console.log('res where is conversation?', res.data);
                             // to avoid unnecessary request to server
                             if (res.data.conversation.length < this.messagesPerPage) {
                                 this.isMessageEnded = true
