@@ -1,8 +1,27 @@
 <template>
     <div class="chatplace">
         <div v-if="!roomChosen" class="chatplace-text">Choose chat to begin</div>
-        <div v-else >
-            <div class="chatplace-messages" ref="chatplaceMessages" @scroll="fetchChatHistory">
+        <div v-else>
+
+            <v-container style="height: 69vh;" v-if="getIsMessagesLoading">
+                <v-row
+                    class="fill-height"
+                    align-content="center"
+                    justify="center"
+                >
+                <v-col class="text-subtitle-1 text-center" cols="12">Loading chat messages</v-col>
+                <v-col cols="6">
+                    <v-progress-linear
+                        color="yellow-darken-3"
+                        indeterminate
+                        rounded
+                        height="6"
+                    ></v-progress-linear>
+                </v-col>
+                </v-row>
+            </v-container>
+
+            <div v-else class="chatplace-messages" ref="chatplaceMessages" @scroll="fetchChatHistory">
                 <UserChat v-for="msg in chatMessages" :msg="msg" :key="msg._id"></UserChat>
                 <!-- bottom place where scroll to -->
                 <p ref="bottomRef"></p>
@@ -37,6 +56,9 @@
             },
             chatMessages() {
                 return this.$store.getters.getChatMessages;  
+            },
+            getIsMessagesLoading() {
+                return this.$store.getters.getIsMessagesLoading;
             }
         },
         watch: {
@@ -80,7 +102,9 @@
             if (!this.toFireScroll) return;
 
             let bottomRef = this.$refs.bottomRef;
-            bottomRef.scrollIntoView({block: "end", behavior: "smooth"});
+            if (bottomRef) {
+                bottomRef.scrollIntoView({block: "end", behavior: "smooth"});
+            }
         },
     }
 </script>

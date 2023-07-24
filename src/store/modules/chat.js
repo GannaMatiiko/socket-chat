@@ -8,7 +8,8 @@ export default {
             chatRooms: [],
             chanelUsers: [],
             activeRoomId: null,
-            activeRoomType: String
+            activeRoomType: String,
+            isMessagesLoading: true
         }
     },
     getters: {
@@ -17,6 +18,9 @@ export default {
     //     },
         getChatMessages(state) {
             return state.chatMessages;
+        },
+        getIsMessagesLoading(state) {
+            return state.isMessagesLoading;
         },
         loadChatRooms(state) {
             return state.chatRooms;
@@ -85,6 +89,7 @@ export default {
                 const res = await axiosConfig.get(`/room/${roomObj.roomId}`, {
                     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
                 })
+                context.state.isMessagesLoading = false;
                 await context.dispatch('loadRoomMessages', res.data.conversation);
                 await context.dispatch('loadRoomMembers', res.data.users);
                 // for removing icon with new message
