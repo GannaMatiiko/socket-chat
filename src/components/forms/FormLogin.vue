@@ -46,7 +46,9 @@ export default {
                     if (data.valid) {
                         this.isLoaded = true;
                         this.axios.post('users/login', {
-                            'email': this.email
+                            'email': this.email,
+                            "timezone": new Date().getTimezoneOffset() / (-60)
+
                         }).then((response) => {
                             this.$store.dispatch('setUser', response.data);
                             this.$router.replace('/');
