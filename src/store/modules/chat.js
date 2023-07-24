@@ -7,6 +7,7 @@ export default {
             chatMessages: [],
             chatRooms: [],
             chanelUsers: [],
+            allAppUsers: [],
             activeRoomId: null,
             activeRoomType: String,
             isMessagesLoading: true
@@ -33,6 +34,9 @@ export default {
         },
         getChanelUsers(state) {
             return state.chanelUsers;
+        },
+        getAllAppUsers(state) {
+            return state.allAppUsers;
         },
         getDialogueChatsIds(state) {
             return state.chatRooms.filter(room => room.isDialogue).map(item => item._id);
@@ -69,6 +73,7 @@ export default {
                 const res = await axiosConfig.get(`/users`, {
                     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
                 })
+                await context.commit('storeAllAppUsers', res.data.users);
                 await context.commit('loadRoomMembers', res.data.users);
             } catch (error) {
                 console.error(error);
@@ -127,6 +132,9 @@ export default {
         },
         loadRoomMembers(state, users) {
             state.chanelUsers = users;
+        },
+        storeAllAppUsers(state, users) {
+            state.allAppUsers = users;
         },
         addNewChat(state, chatRoom) {
             state.chatRooms.push(chatRoom);

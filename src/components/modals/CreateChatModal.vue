@@ -57,10 +57,10 @@
     },
     computed: {
       allChatUsers() {
-        console.log('in computed all chanel users', JSON.parse(JSON.stringify(this.$store.getters.getChanelUsers)));
-        console.log('in computed filtered chanel users', JSON.parse(JSON.stringify(this.$store.getters.getChanelUsers.filter(user => !user.isCurrentUser))));
+        console.log('in computed all chanel users', JSON.parse(JSON.stringify(this.$store.getters.getAllAppUsers)));
+        console.log('in computed filtered chanel users', JSON.parse(JSON.stringify(this.$store.getters.getAllAppUsers.filter(user => !user.isCurrentUser))));
         // return this.$store.getters.getChanelUsers.filter(user => !user.isCurrentUser);
-        return JSON.parse(JSON.stringify(this.$store.getters.getChanelUsers.filter(user => !user.isCurrentUser)));
+        return JSON.parse(JSON.stringify(this.$store.getters.getAllAppUsers.filter(user => !user.isCurrentUser)));
       }
     },
     methods: {
