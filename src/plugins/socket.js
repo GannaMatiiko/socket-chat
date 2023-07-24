@@ -28,5 +28,8 @@ socket.on("messagePublished", (msg) => {
   }
 });
 
+socket.on("joinedGroup", () => {
+  console.log('on joined group');
+})
 
 export default socket;
