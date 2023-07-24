@@ -11,7 +11,6 @@ instance.interceptors.response.use(response => {
  }, error => {
    if (error.response.status === 401) {
     //place your reentry code
-    console.log('401 Occured!');
     router.replace('/login');
     store.dispatch('logoutUser')
    }

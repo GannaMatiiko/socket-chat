@@ -28,8 +28,5 @@ socket.on("messagePublished", (msg) => {
   }
 });
 
-socket.onAny((event, ...args) => {
-    console.log('*', event, args, 'socketId', socket.id);
-});
 
 export default socket;

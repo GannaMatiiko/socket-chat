@@ -33,13 +33,11 @@ import socket from '@/plugins/socket.js'
             }
         },
         created() {
-            console.log('IN CREATED');
             socket.connect();
-            console.log('socket', socket);
 
             socket.on("connect_error", (err) => {
             if (err.message === "error user") {
-                console.log('Oops, connect error');
+                console.error('Oops, connect error');
             }
             });
         },

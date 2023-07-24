@@ -31,7 +31,7 @@
                         return-object
                         multiple
                     ></v-select>
-                    <div v-else class="text-center">
+                    <div v-if="!isLoadingExceptionalUsers && exceptUsersInRoom.length === 0" class="text-center">
                         All available users added
                     </div>
                 </v-card-text>
@@ -56,7 +56,8 @@
         rulesMembersSelect: [value => Boolean(Object.keys(value || {})[0]) || "Field is required"],
         dialog: false,
         addedToChatUsers: [],
-        exceptUsersInRoom: []
+        exceptUsersInRoom: [],
+        isLoadingExceptionalUsers: true
       }
     },
     computed: {
@@ -70,7 +71,8 @@
                 headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
             })
             .then(res => {
-                this.exceptUsersInRoom = res.data.users
+                this.exceptUsersInRoom = res.data.users;
+                this.isLoadingExceptionalUsers = false;
             })
             .catch(error => console.error(error))
         },
