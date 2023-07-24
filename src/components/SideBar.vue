@@ -1,18 +1,35 @@
 <template>
     <div class="sidebar">
-        <UserCard v-for="user in users" :user="user" :key="user._id" @click="selectChatInfo(user._id, user.isDialogue)"></UserCard>
+        <v-container style="height: 400px;" v-if="isRoomsLoading">
+            <v-row
+                class="fill-height"
+                align-content="center"
+                justify="center"
+            >
+            <v-col class="text-subtitle-1 text-center" cols="12">Loading chat rooms</v-col>
+            <v-col cols="6">
+                <v-progress-linear
+                    color="light-green-darken-3"
+                    indeterminate
+                    rounded
+                    height="6"
+                ></v-progress-linear>
+            </v-col>
+            </v-row>
+        </v-container>
+        <UserCard v-else v-for="user in users" :user="user" :key="user._id" @click="selectChatInfo(user._id, user.isDialogue)"></UserCard>
     </div>
     </template>
 
 <script>
-    import UserCard from '@/components/user/UserCard.vue'
+    import UserCard from '@/components/user/UserCard.vue';
     export default {
         components: {
-            UserCard
+            UserCard,
         },
         data() {
             return {
-                // users: []
+                isRoomsLoading: true
             }
         },
         computed: {
@@ -33,7 +50,10 @@
             this.axios.get('/users/chat-rooms', {
                 headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
             })
-            .then(res => this.$store.dispatch('loadChatRooms', res.data))
+            .then(res => {
+                this.$store.dispatch('loadChatRooms', res.data);
+                this.isRoomsLoading = false;
+            })
             .catch(error => console.error(error))
         }
     }

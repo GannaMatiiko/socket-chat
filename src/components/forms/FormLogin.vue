@@ -14,7 +14,12 @@
                             label="Enter your e-mail"
                             autocomplete="on"
                             ></v-text-field>
-                            <v-btn type="submit" block class="mt-2">Login</v-btn>
+                            <v-btn v-if="!isLoaded" type="submit" block class="mt-2">Login</v-btn>
+                            <v-progress-circular
+                                v-else
+                                indeterminate
+                                color="green"
+                            ></v-progress-circular>
                         </v-form>
                     </div>
                 </v-sheet>
@@ -27,6 +32,7 @@
 // import socket from '@/plugins/socket.js'
 export default {
     data: () => ({
+        isLoaded: false,
         email: '',
         rules: [
             value => /.+@.+/.test(value) || 'Invalid Email address'
@@ -38,6 +44,7 @@ export default {
             this.$refs.loginForm.validate()
                 .then(data => {
                     if (data.valid) {
+                        this.isLoaded = true;
                         this.axios.post('users/login', {
                             'email': this.email
                         }).then((response) => {

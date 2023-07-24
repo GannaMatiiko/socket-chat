@@ -1,5 +1,5 @@
 <template>
-    <v-form @submit.prevent="sendMessageText" class="send-form" ref="sendMessageForm">
+    <v-form @submit.prevent="sendMessageText" class="send-form">
         <v-textarea 
             @keydown.enter.prevent="sendMessageText" 
             v-model="messageText" 
