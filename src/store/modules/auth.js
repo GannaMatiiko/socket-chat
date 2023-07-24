@@ -39,7 +39,7 @@ export default {
             this.state.chat.chatMessages = [];
             this.state.chat.chanelUsers = [];
             this.state.chat.chatRooms = [];
-            this.state.chat.activeRoomId = [];
+            this.state.chat.activeRoomId = null;
             localStorage.removeItem('token');
             localStorage.removeItem('login');
             localStorage.removeItem('userId');
