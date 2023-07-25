@@ -28,9 +28,9 @@ socket.on("messagePublished", (msg) => {
   }
 });
 
-socket.on("joinedGroup", () => {
+socket.on("joinedGroup", (newChatGroup) => {
   console.log('on joined group');
-  window.location.reload();
+  store.dispatch('addNewChat', newChatGroup);
 })
 
 export default socket;
