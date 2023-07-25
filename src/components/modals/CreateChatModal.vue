@@ -70,16 +70,9 @@
         },  {
             headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }                               
         })
-        .then((res) => {
-          let newChatGroup = {
-            _id: res.data._id,
-            name: res.data.name,
-            isDialogue: false
-          }
-          this.$store.dispatch('addNewChat', newChatGroup);
+        .then(() => {
           this.chatName = '';
           this.addedToChatUsers = [];
-
         })
         .catch(e => console.error('Cannot create group chat', e))
       }
